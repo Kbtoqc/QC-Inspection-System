@@ -9,11 +9,23 @@
 <h1>QC Inspection System</h1>
 
 <p>Inspector</p>
-<select>
+<select id="inspector">
     <option>Select Inspector</option>
-    <option>Somchai</option>
-    <option>Anan</option>
 </select>
+
+<script>
+fetch("data/inspector.json")
+.then(response => response.json())
+.then(data => {
+    let box = document.getElementById("inspector");
+
+    data.forEach(name => {
+        let option = document.createElement("option");
+        option.text = name;
+        box.add(option);
+    });
+});
+</script>
 
 <p>Product</p>
 <select>
