@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>QC Inspection System</title>
 </head>
@@ -13,33 +14,60 @@
     <option>Select Inspector</option>
 </select>
 
-<script>
-fetch("data/inspector.json")
-.then(response => response.json())
-.then(data => {
-    let box = document.getElementById("inspector");
-
-    data.forEach(name => {
-        let option = document.createElement("option");
-        option.text = name;
-        box.add(option);
-    });
-});
-</script>
 
 <p>Product</p>
-<select>
+<select id="product">
     <option>Select Product</option>
-    <option>Pump</option>
-    <option>Motor</option>
 </select>
 
+
 <p>Serial No</p>
-<input type="text" placeholder="Enter Serial No">
+<input type="text" id="serial" placeholder="Enter Serial No">
+
 
 <br><br>
 
 <button>Start Inspection</button>
 
+
+<script>
+
+fetch("data/inspector.json")
+.then(response => response.json())
+.then(data => {
+
+    let box = document.getElementById("inspector");
+
+    data.forEach(name => {
+
+        let option = document.createElement("option");
+        option.text = name;
+        box.add(option);
+
+    });
+
+});
+
+
+fetch("data/product.json")
+.then(response => response.json())
+.then(data => {
+
+    let box = document.getElementById("product");
+
+    data.forEach(name => {
+
+        let option = document.createElement("option");
+        option.text = name;
+        box.add(option);
+
+    });
+
+});
+
+
+</script>
+
 </body>
+
 </html>
