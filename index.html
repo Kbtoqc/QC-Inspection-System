@@ -1,108 +1,62 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
     <title>QC Inspection System</title>
 </head>
-
 <body>
-
 ```
 <h1>QC Inspection System</h1>
 
 <p>Inspection Date</p>
-<input
-    type="date"
-    id="inspectionDate">
+<input type="date" id="inspectionDate">
 
 <p>SO No</p>
-<input 
-    type="text" 
-    id="soNo"
-    placeholder="Enter SO No">
+<input type="text" id="soNo" placeholder="Enter SO No">
 
-<p>Inspector</p>
-<select id="inspector">
-    <option value="">Select Inspector</option>
-</select>
+<p>Inspector</p> 
+<select id="inspector"><option value="">Select Inspector</option></select>
 
 <p>Inspection Type</p>
-
-<select id="inspectionType">
-    <option value="">
-        Select Inspection Type
-    </option>
-</select>
+<select id="inspectionType"><option value=""> Select Inspection Type </option></select>
     
 <p>Material Type</p>
-<select id="material" onchange="loadInspectionItem()">
-    <option value="">Select Material</option>
-</select>
+<select id="material" onchange="loadInspectionItem()"><option value="">Select Material</option></select>
 
 <p>Model</p>
-<input 
-    type="text" 
-    id="model"
-    placeholder="Enter Model">
+<input type="text" id="model" placeholder="Enter Model">
 
 <p>Serial No</p>
-<input 
-    type="text" 
-    id="serialNo"
-    placeholder="Enter Serial No">
+<input type="text" id="serialNo" placeholder="Enter Serial No">
 
 <p>PO No</p>
-<input 
-    type="text" 
-    id="poNo"
-    placeholder="Enter PO No">
+<input type="text" id="poNo" placeholder="Enter PO No">
 
 <p>Supplier</p>
-<select id="supplier">
-    <option value="">
-        Select Supplier
-    </option>
-</select>
+<select id="supplier"><option value=""> Select Supplier</option></select>
 
 <p>Customer</p>
-<select id="customer">
-    <option value="">
-        Select Customer
-    </option>
-</select>
+<select id="customer"><option value=""> Select Customer</option></select>
     
 <h3>Inspection Items</h3>
-
 <table border="1">
-
-    <thead>
-        <tr>
-            <th>Item No</th>
-            <th>Check Point</th>
-            <th>Spec</th>
-            <th>Check Type</th>
-            <th>Result</th>
-            <th>Remark</th>
-        </tr>
+<thead>
+<tr>
+    <th>Item No</th>
+    <th>Check Point</th>
+    <th>Spec</th>
+    <th>Check Type</th>
+    <th>Result</th>
+    <th>Remark</th>
+</tr>
     </thead>
-
     <tbody id="inspectionBody">
     </tbody>
 
 </table>
-
-
-<p>Serial No</p>
-<input type="text" id="serial" placeholder="Enter Serial No">
-
-
 <br><br>
-
 <button id="startInspection">
     Start Inspection
 </button>
-
 
 <script src="js/inspector.js"></script>
 <script src="js/inspectionType.js"></script>
@@ -113,7 +67,5 @@
 <script src="js/customer.js"></script>
 <script src="js/inspectionDate.js"></script>
 ```
-
 </body>
-
 </html>
