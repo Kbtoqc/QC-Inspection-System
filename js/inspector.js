@@ -10,8 +10,8 @@ fetch("https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1Wq
 
         let option = document.createElement("option");
 
-        option.text = item.Inspector_Name;
-        option.value = item.Inspector_Name;
+        option.text = item;
+        option.value = item;
 
         box.add(option);
 
