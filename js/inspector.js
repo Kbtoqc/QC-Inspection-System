@@ -1,20 +1,30 @@
-fetch("https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1WqtvdZ3I7amsrUGgA_kAhLEdiOHGBuJV74tj/exec")
+const INSPECTOR_API = "https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1WqtvdZ3I7amsrUGgA_kAhLEdiOHGBuJV74tj/exec";
+
+
+fetch(INSPECTOR_API)
 
 .then(response => response.json())
 
 .then(data => {
 
-    let box = document.getElementById("inspector");
+    const inspectorBox = document.getElementById("inspector");
 
-    data.forEach(item => {
 
-        let option = document.createElement("option");
+    data.forEach(name => {
 
-        option.text = item;
-        option.value = item;
+        const option = document.createElement("option");
 
-        box.add(option);
+        option.textContent = name;
+        option.value = name;
+
+        inspectorBox.appendChild(option);
 
     });
+
+
+})
+.catch(error => {
+
+    console.log("Inspector Load Error:", error);
 
 });
