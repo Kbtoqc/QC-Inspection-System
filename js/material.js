@@ -1,4 +1,4 @@
-const MATERIAL_API = "URL_WEB_APP_MATERIAL_TYPE";
+const MATERIAL_API = "https://script.google.com/macros/s/AKfycbwOXcgOVIpMYFKRcceRi3Uxhp_zxBq05VchU18xF-3mwKXJ1hWjzzGmjCozwLkK3A0l/exec";
 
 fetch(MATERIAL_API)
 
