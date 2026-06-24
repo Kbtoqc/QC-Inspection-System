@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -7,56 +8,58 @@
 
 <body>
 
-    <h1>QC Inspection System</h1>
+```
+<h1>QC Inspection System</h1>
 
-    <p>Inspector</p>
-    <select id="inspector">
-        <option value="">Select Inspector</option>
-    </select>
-
-
-    <p>Material Type</p>
-    <select id="material" onchange="loadInspectionItem()">
-        <option value="">Select Material</option>
-    </select>
+<p>Inspector</p>
+<select id="inspector">
+    <option value="">Select Inspector</option>
+</select>
 
 
-    <h3>Inspection Items</h3>
-
-    <table border="1">
-
-        <thead>
-            <tr>
-    <th>Item No</th>
-    <th>Check Point</th>
-    <th>Spec</th>
-    <th>Check Type</th>
-    <th>Result</th>
-    <th>Remark</th>
-            </tr>
-        </thead>
-
-        <tbody id="inspectionBody">
-        </tbody>
-
-    </table>
+<p>Material Type</p>
+<select id="material" onchange="loadInspectionItem()">
+    <option value="">Select Material</option>
+</select>
 
 
-    <p>Serial No</p>
-    <input type="text" id="serial" placeholder="Enter Serial No">
+<h3>Inspection Items</h3>
+
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>Item No</th>
+            <th>Check Point</th>
+            <th>Spec</th>
+            <th>Check Type</th>
+            <th>Result</th>
+            <th>Remark</th>
+        </tr>
+    </thead>
+
+    <tbody id="inspectionBody">
+    </tbody>
+
+</table>
 
 
-    <br><br>
-
-    <button>
-        Start Inspection
-    </button>
+<p>Serial No</p>
+<input type="text" id="serial" placeholder="Enter Serial No">
 
 
-    <script src="js/inspector.js"></script>
-    <script src="js/material.js"></script>
-    <script src="js/inspectionItem.js"></script>
-    <script src="js/inspectionForm.js"></script>
+<br><br>
+
+<button id="startInspection">
+    Start Inspection
+</button>
+
+
+<script src="js/inspector.js"></script>
+<script src="js/material.js"></script>
+<script src="js/inspectionForm.js"></script>
+<script src="js/inspectionItem.js"></script>
+```
 
 </body>
 
