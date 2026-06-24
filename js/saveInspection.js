@@ -75,11 +75,14 @@ function saveInspection(){
             checkType:
                 row.cells[3].innerText,
 
+
             resultType:
-                "",
+                row.cells[3].innerText,
+
 
             result:
                 "",
+
 
             remark:
                 ""
@@ -87,8 +90,9 @@ function saveInspection(){
         };
 
 
+
         let resultElement =
-            row.cells[4].querySelector("select, input");
+            row.cells[4].querySelector("select, input, textarea");
 
 
         if(resultElement){
@@ -99,8 +103,9 @@ function saveInspection(){
         }
 
 
+
         let remarkElement =
-            row.cells[5].querySelector("input");
+            row.cells[5].querySelector("input, textarea");
 
 
         if(remarkElement){
@@ -111,7 +116,18 @@ function saveInspection(){
         }
 
 
+
         headerData.items.push(item);
+
+    }
+
+
+
+    if(headerData.items.length === 0){
+
+        alert("No inspection item found");
+
+        return;
 
     }
 
@@ -133,11 +149,31 @@ function saveInspection(){
 
     .then(data=>{
 
+
         alert(
             "Save Complete\n" + inspectionNo
         );
 
+
+        console.log(data);
+
+
+    })
+
+
+    .catch(error=>{
+
+
+        alert(
+            "Save Failed\n" + error
+        );
+
+
+        console.error(error);
+
+
     });
+
 
 
 }
@@ -152,8 +188,10 @@ function generateInspectionNo(){
         new Date();
 
 
+
     let yyyy =
         today.getFullYear();
+
 
 
     let mm =
@@ -161,15 +199,39 @@ function generateInspectionNo(){
         .padStart(2,"0");
 
 
+
     let dd =
         String(today.getDate())
         .padStart(2,"0");
 
 
-    return "INS-" 
-        + yyyy 
-        + mm 
+
+    let hh =
+        String(today.getHours())
+        .padStart(2,"0");
+
+
+
+    let mi =
+        String(today.getMinutes())
+        .padStart(2,"0");
+
+
+
+    let ss =
+        String(today.getSeconds())
+        .padStart(2,"0");
+
+
+
+    return "INS-"
+        + yyyy
+        + mm
         + dd
-        + "-001";
+        + "-"
+        + hh
+        + mi
+        + ss;
+
 
 }
