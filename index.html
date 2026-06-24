@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -14,21 +15,40 @@
     <option>Select Inspector</option>
 </select>
 
-
 <p>Product</p>
 <select id="product">
     <option>Select Product</option>
 </select>
 
+<p>Material Type</p>
+<select id="material">
+    <option>Select Material</option>
+    <option>Pump</option>
+</select>
+
+<h3>Inspection Items</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Inspection Item</th>
+        </tr>
+    </thead>
+
+```
+<tbody id="inspectionBody">
+</tbody>
+```
+
+</table>
 
 <p>Serial No</p>
 <input type="text" id="serial" placeholder="Enter Serial No">
 
-
 <br><br>
 
 <button>Start Inspection</button>
-
 
 <script>
 
@@ -48,7 +68,6 @@ fetch("https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1Wq
 
 });
 
-
 fetch("data/product.json")
 .then(response => response.json())
 .then(data => {
@@ -64,7 +83,6 @@ fetch("data/product.json")
     });
 
 });
-
 
 </script>
 
