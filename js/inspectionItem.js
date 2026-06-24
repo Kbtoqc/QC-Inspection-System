@@ -17,21 +17,62 @@ function loadInspectionItem() {
 
     .then(data => {
 
+
         data.forEach(item => {
+
 
             if(item.materialType === material){
 
-                const row = body.insertRow();
 
-                row.insertCell(0).textContent = item.itemNo;
-                row.insertCell(1).textContent = item.checkPoint;
-                row.insertCell(2).textContent = item.spec;
-                row.insertCell(3).textContent = item.checkType;
-                row.insertCell(4).textContent = item.resultType;
+                let row = body.insertRow();
+
+
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+                let cell5 = row.insertCell(4);
+                let cell6 = row.insertCell(5);
+
+
+                cell1.textContent = item.itemNo;
+
+                cell2.textContent = item.checkPoint;
+
+                cell3.textContent = item.spec;
+
+                cell4.textContent = item.checkType;
+
+
+                // Result
+
+                let result = createResultInput(
+                    item.resultType,
+                    item.itemNo
+                );
+
+                cell5.appendChild(result);
+
+
+                // Remark
+
+                let remark = document.createElement("input");
+
+                remark.type = "text";
+
+                remark.placeholder = "Remark";
+
+                remark.id = "remark_" + item.itemNo;
+
+
+                cell6.appendChild(remark);
+
 
             }
 
+
         });
+
 
     });
 
