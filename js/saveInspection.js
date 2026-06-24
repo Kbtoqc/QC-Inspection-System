@@ -156,7 +156,8 @@ function saveInspection(){
 
 
         console.log(data);
-
+        
+        location.reload();
 
     })
 
