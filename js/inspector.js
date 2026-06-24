@@ -6,12 +6,12 @@ fetch("https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1Wq
 
     let box = document.getElementById("inspector");
 
-    data.forEach(name => {
+    data.forEach(item => {
 
         let option = document.createElement("option");
 
-        option.text = name;
-        option.value = name;
+        option.text = item.Inspector_Name;
+        option.value = item.Inspector_Name;
 
         box.add(option);
 
