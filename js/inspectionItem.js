@@ -27,6 +27,7 @@ function loadInspectionItem() {
                 row.insertCell(1).textContent = item.checkPoint;
                 row.insertCell(2).textContent = item.spec;
                 row.insertCell(3).textContent = item.checkType;
+                row.insertCell(4).textContent = item.resultType;
 
             }
 
