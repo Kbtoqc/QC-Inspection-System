@@ -1,12 +1,14 @@
 console.log("Save JS Loaded");
 
 
-document.addEventListener("DOMContentLoaded", function(){
+const saveButton = document.getElementById("saveInspection");
 
-  const saveButton = document.getElementById("saveInspection");
 
-  console.log("Save Button:", saveButton);
+console.log("Save Button:", saveButton);
 
+
+
+if(saveButton){
 
   saveButton.addEventListener("click", function(){
 
@@ -14,5 +16,4 @@ document.addEventListener("DOMContentLoaded", function(){
 
   });
 
-
-});
+}
