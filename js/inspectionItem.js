@@ -10,25 +10,17 @@ const body = document.getElementById("inspectionBody");
 
 body.innerHTML = "";
 
-
 fetch(INSPECTION_ITEM_API)
 
 .then(response => response.json())
 
 .then(data => {
 
-
     data.forEach(item => {
-
 
         if(item.materialType === material){
 
-
             let row = body.insertRow();
-
-            row.dataset.resultType =
-                item.resultType;
-
 
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
@@ -36,7 +28,6 @@ fetch(INSPECTION_ITEM_API)
             let cell4 = row.insertCell(3);
             let cell5 = row.insertCell(4);
             let cell6 = row.insertCell(5);
-
 
             cell1.textContent = item.itemNo;
 
@@ -46,14 +37,12 @@ fetch(INSPECTION_ITEM_API)
 
             cell4.textContent = item.checkType;
 
-
             let result = createResultInput(
                 item.resultType,
                 item.itemNo
             );
 
             cell5.appendChild(result);
-
 
             let remark =
                 document.createElement("input");
@@ -65,15 +54,19 @@ fetch(INSPECTION_ITEM_API)
             remark.id =
                 "remark_" + item.itemNo;
 
-
             cell6.appendChild(remark);
-
 
         }
 
-
     });
 
+})
+
+.catch(error => {
+
+    console.error(error);
+
+    alert("Inspection Item Load Error");
 
 });
 ```
