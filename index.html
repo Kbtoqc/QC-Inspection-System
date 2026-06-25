@@ -82,10 +82,27 @@
 <br>  
 
 <div>
-  <label>Inspection Item</label>
-  <select id="inspectionItem">
-    <option value="">Select Material First</option>
-  </select>
+  <label>Inspection Checklist</label>
+
+  <table border="1" id="inspectionTable">
+
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Check Point</th>
+        <th>Spec</th>
+        <th>Check Type</th>
+        <th>Result</th>
+        <th>Remark</th>
+      </tr>
+    </thead>
+
+    <tbody id="inspectionBody">
+
+    </tbody>
+
+  </table>
+
 </div>
 
 <script src="js/inspectionDate.js"></script>
