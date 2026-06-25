@@ -1,19 +1,40 @@
-fetch("https://script.google.com/macros/s/AKfycbzv1IRXeBSLB1S9y-0XtcJk9m181o_UIvPctafuUKOyocYoipFbxH1z413JcGXsfR0UQg/exec")
+document.addEventListener("DOMContentLoaded", () => {
 
-.then(response => response.json())
+  const CUSTOMER_API =
+    "ใส่ URL Web App ของ Customer ตรงนี้";
 
-.then(data => {
+  const customerBox = document.getElementById("customer");
 
-    let box = document.getElementById("customer");
 
-    data.forEach(item => {
+  fetch(CUSTOMER_API)
 
-        let option = document.createElement("option");
+    .then(response => response.json())
 
-        option.text = item;
-        option.value = item;
+    .then(data => {
 
-        box.add(option);
+      customerBox.innerHTML =
+        '<option value="">Select Customer</option>';
+
+
+      data.forEach(name => {
+
+        const option = document.createElement("option");
+
+        option.value = name;
+        option.textContent = name;
+
+        customerBox.appendChild(option);
+
+      });
+
+    })
+
+    .catch(error => {
+
+      console.error("Customer Load Error:", error);
+
+      customerBox.innerHTML =
+        '<option value="">Load Failed</option>';
 
     });
 
