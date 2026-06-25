@@ -1,15 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+
   const INSPECTION_ITEM_API =
   "https://script.google.com/macros/s/AKfycbw9QKqQNuHD5nQdP7MTwDOc5vu4nyMFCgeeHsXnG7dZYxrykaCf2yJv4-ZU36CvYvYU/exec";
 
 
   const materialBox = document.getElementById("material");
-  const itemBox = document.getElementById("inspectionItem");
+
+  const inspectionBody =
+    document.getElementById("inspectionBody");
 
 
   let inspectionItems = [];
 
+
+  // Load checklist master
 
   fetch(INSPECTION_ITEM_API)
 
@@ -19,49 +24,142 @@ document.addEventListener("DOMContentLoaded", () => {
 
       inspectionItems = data;
 
-      itemBox.innerHTML =
-      '<option value="">Select Material First</option>';
-
     })
 
     .catch(error => {
 
-      console.error("Inspection Item Load Error:", error);
+      console.error(
+        "Inspection Item Load Error:",
+        error
+      );
 
     });
 
 
 
+  // เมื่อเลือก Material Type
+
   materialBox.addEventListener("change", () => {
 
 
-    const selectedMaterial = materialBox.value;
+    const materialType = materialBox.value;
 
 
-    itemBox.innerHTML =
-    '<option value="">Select Inspection Item</option>';
+    inspectionBody.innerHTML = "";
 
 
-    const filteredItems = inspectionItems.filter(item =>
-      item.materialType === selectedMaterial
-    );
+    if (!materialType) {
+
+      return;
+
+    }
 
 
-    filteredItems.forEach(item => {
+    const checklist =
+      inspectionItems.filter(item =>
+        item.materialType === materialType
+      );
 
 
-      const option = document.createElement("option");
+
+    checklist.forEach((item, index) => {
 
 
-      option.value = item.itemNo;
-
-      option.textContent =
-        item.itemNo + " - " +
-        item.checkPoint + " - " +
-        item.spec;
+      const row =
+      document.createElement("tr");
 
 
-      itemBox.appendChild(option);
+
+      // Result Column
+
+      let resultInput = "";
+
+
+
+      if (item.resultType === "OKNGNA") {
+
+
+        resultInput = `
+
+          <select class="result">
+
+            <option value="">
+              Select
+            </option>
+
+            <option value="OK">
+              OK
+            </option>
+
+            <option value="NG">
+              NG
+            </option>
+
+            <option value="NA">
+              NA
+            </option>
+
+          </select>
+
+        `;
+
+
+      } else if (item.resultType === "Value") {
+
+
+        resultInput = `
+
+          <input 
+            type="text"
+            class="result"
+            placeholder="Enter Value">
+
+        `;
+
+
+      }
+
+
+
+      row.innerHTML = `
+
+        <td>
+          ${item.itemNo}
+        </td>
+
+
+        <td>
+          ${item.checkPoint}
+        </td>
+
+
+        <td>
+          ${item.spec}
+        </td>
+
+
+        <td>
+          ${item.checkType}
+        </td>
+
+
+        <td>
+          ${resultInput}
+        </td>
+
+
+        <td>
+          <input 
+            type="text"
+            class="remark"
+            placeholder="Remark">
+        </td>
+
+
+      `;
+
+
+      inspectionBody.appendChild(row);
 
 
     });
