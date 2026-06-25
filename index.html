@@ -1,38 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>QC Inspection System</title>
+  <base target="_top">
+  <title>QC Inspection</title>
 </head>
+
 <body>
 
-<h1>QC Inspection System</h1>
+<h2>QC Inspection Form</h2>
 
-<p>Material Type</p>
+<div>
+  <label>Inspection Date</label>
+  <input type="date" id="inspectionDate">
+</div>
 
-<select id="material">
-    <option value="">Select Material</option>
-</select>
 
-<table border="1">
-
-<thead>
-
-<tr>
-    <th>Item No</th>
-    <th>Check Point</th>
-    <th>Spec</th>
-    <th>Check Type</th>
-</tr>
-
-</thead>
-
-<tbody id="inspectionBody">
-
-</tbody>
-
-</table>
-
-<script src="js/material.js"></script>
+<script src="inspectionDate.js"></script>
 
 </body>
 </html>
