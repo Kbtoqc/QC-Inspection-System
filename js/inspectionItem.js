@@ -12,14 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   fetch(INSPECTION_ITEM_API)
+
     .then(response => response.json())
+
     .then(data => {
 
       inspectionItems = data;
 
-      console.log("Inspection Item Loaded:", inspectionItems);
+      console.log("Inspection Item Loaded", inspectionItems);
 
     })
+
     .catch(error => {
 
       console.error("Inspection Item Load Error:", error);
@@ -28,30 +31,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  materialBox.addEventListener("change", () => {
+  materialBox.addEventListener("change", function() {
 
 
-    const materialType = materialBox.value;
+    const selectedMaterial = this.value;
 
 
     inspectionBody.innerHTML = "";
 
 
-    const checklist = inspectionItems.filter(item =>
-      item.materialType === materialType
+    const items = inspectionItems.filter(item =>
+      item.materialType === selectedMaterial
     );
 
 
-    checklist.forEach(item => {
-
-
-      const row = document.createElement("tr");
+    items.forEach(item => {
 
 
       let resultField = "";
 
 
       if (item.resultType === "OKNGNA") {
+
 
         resultField = `
           <select>
@@ -62,22 +63,34 @@ document.addEventListener("DOMContentLoaded", () => {
           </select>
         `;
 
-      } else {
+
+      } else if (item.resultType === "Value") {
+
 
         resultField = `
           <input type="text">
         `;
 
+
       }
+
+
+
+      const row = document.createElement("tr");
 
 
       row.innerHTML = `
 
         <td>${item.itemNo}</td>
+
         <td>${item.checkPoint}</td>
+
         <td>${item.spec}</td>
+
         <td>${item.checkType}</td>
+
         <td>${resultField}</td>
+
         <td>
           <input type="text">
         </td>
