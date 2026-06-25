@@ -1,21 +1,41 @@
-const MATERIAL_API = "https://script.google.com/macros/s/AKfycbwOXcgOVIpMYFKRcceRi3Uxhp_zxBq05VchU18xF-3mwKXJ1hWjzzGmjCozwLkK3A0l/exec";
+document.addEventListener("DOMContentLoaded", () => {
 
-fetch(MATERIAL_API)
+  const MATERIAL_API =
+  "https://script.google.com/macros/s/AKfycbwOXcgOVIpMYFKRcceRi3Uxhp_zxBq05VchU18xF-3mwKXJ1hWjzzGmjCozwLkK3A0l/exec";
 
-.then(response => response.json())
 
-.then(data => {
+  const materialBox = document.getElementById("material");
 
-    const materialBox = document.getElementById("material");
 
-    data.forEach(material => {
+  fetch(MATERIAL_API)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+      materialBox.innerHTML =
+        '<option value="">Select Material Type</option>';
+
+
+      data.forEach(name => {
 
         const option = document.createElement("option");
 
-        option.textContent = material;
-        option.value = material;
+        option.value = name;
+        option.textContent = name;
 
         materialBox.appendChild(option);
+
+      });
+
+    })
+
+    .catch(error => {
+
+      console.error("Material Load Error:", error);
+
+      materialBox.innerHTML =
+        '<option value="">Load Failed</option>';
 
     });
 
