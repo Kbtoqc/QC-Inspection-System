@@ -4,11 +4,17 @@ const INSPECTION_ITEM_API =
 function loadInspectionItem() {
 
 ```
-const material = document.getElementById("material").value;
+const material =
+    document.getElementById("material").value;
 
-const body = document.getElementById("inspectionBody");
+const body =
+    document.getElementById("inspectionBody");
 
 body.innerHTML = "";
+
+if(material === ""){
+    return;
+}
 
 fetch(INSPECTION_ITEM_API)
 
@@ -16,48 +22,65 @@ fetch(INSPECTION_ITEM_API)
 
 .then(data => {
 
-    data.forEach(item => {
+    const filteredData =
+        data.filter(item =>
+            item.materialType === material
+        );
 
-        if(item.materialType === material){
+    filteredData.forEach(item => {
 
-            let row = body.insertRow();
+        let row = body.insertRow();
 
-            let cell1 = row.insertCell(0);
-            let cell2 = row.insertCell(1);
-            let cell3 = row.insertCell(2);
-            let cell4 = row.insertCell(3);
-            let cell5 = row.insertCell(4);
-            let cell6 = row.insertCell(5);
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        let cell3 = row.insertCell(2);
+        let cell4 = row.insertCell(3);
+        let cell5 = row.insertCell(4);
+        let cell6 = row.insertCell(5);
 
-            cell1.textContent = item.itemNo;
+        cell1.textContent =
+            item.itemNo;
 
-            cell2.textContent = item.checkPoint;
+        cell2.textContent =
+            item.checkPoint;
 
-            cell3.textContent = item.spec;
+        cell3.textContent =
+            item.spec;
 
-            cell4.textContent = item.checkType;
+        cell4.textContent =
+            item.checkType;
 
-            // Result
-
-            let result = createResultInput(
+        let result =
+            createResultInput(
                 item.resultType,
                 item.itemNo
             );
 
-            cell5.appendChild(result);
+        cell5.appendChild(result);
 
-            // Remark
+        let remark =
+            document.createElement("input");
 
-            let remark = document.createElement("input");
+        remark.type = "text";
 
-            remark.type = "text";
+        remark.placeholder = "Remark";
 
-            remark.placeholder = "Remark";
+        remark.id =
+            "remark_" + item.itemNo;
 
-            remark.id = "remark_" + item.itemNo;
-
-            cell6.appendChild(remark);
-
-        }
+        cell6.appendChild(remark);
 
     });
+
+})
+
+.catch(error => {
+
+    console.error(error);
+
+    alert("Load Inspection Item Error");
+
+});
+```
+
+}
