@@ -4,103 +4,35 @@
     <title>QC Inspection System</title>
 </head>
 <body>
-```
+
 <h1>QC Inspection System</h1>
 
-<p>Inspection Date</p>
-<input type="date" id="inspectionDate">
-
-<p>SO No</p>
-<input type="text" id="soNo" placeholder="Enter SO No">
-
-<p>Inspector</p> 
-<select id="inspector"><option value="">Select Inspector</option></select>
-
-<p>Inspection Type</p>
-<select id="inspectionType"><option value=""> Select Inspection Type </option></select>
-    
 <p>Material Type</p>
-<select id="material" onchange="loadInspectionItem()"><option value="">Select Material</option></select>
 
-<p>Model</p>
-<input type="text" id="model" placeholder="Enter Model">
+<select id="material">
+    <option value="">Select Material</option>
+</select>
 
-<p>Serial No</p>
-<input type="text" id="serialNo" placeholder="Enter Serial No">
-
-<p>PO No</p>
-<input type="text" id="poNo" placeholder="Enter PO No">
-
-<p>Supplier</p>
-<select id="supplier"><option value=""> Select Supplier</option></select>
-
-<p>Customer</p>
-<select id="customer"><option value=""> Select Customer</option></select>
-    
-<h3>Inspection Items</h3>
 <table border="1">
+
 <thead>
+
 <tr>
     <th>Item No</th>
     <th>Check Point</th>
     <th>Spec</th>
     <th>Check Type</th>
-    <th>Result</th>
-    <th>Remark</th>
 </tr>
-    </thead>
-    <tbody id="inspectionBody">
-    </tbody>
+
+</thead>
+
+<tbody id="inspectionBody">
+
+</tbody>
 
 </table>
-<br><br>
 
-<h3>Final Judgement</h3>
-
-<select id="finalJudgement">
-
-<option value="">
-Select Judgement
-</option>
-
-<option value="Accept">
-Accept
-</option>
-
-<option value="Reject">
-Reject
-</option>
-
-<option value="Hold">
-Hold
-</option>
-
-</select>
-
-
-<h3>Overall Remark</h3>
-
-<textarea 
-    id="overallRemark"
-    rows="5"
-    cols="50"
-    placeholder="Enter overall remark">
-</textarea>
-
-<button onclick="saveInspection()">
-    Start Inspection
-</button>
-
-<script src="js/inspector.js"></script>
-<script src="js/inspectionType.js"></script>
 <script src="js/material.js"></script>
-<script src="js/supplier.js"></script>
-<script src="js/customer.js"></script>
-<script src="js/inspectionDate.js"></script>
 
-<script src="js/inspectionItem.js"></script>
-<script src="js/inspectionForm.js"></script>
-<script src="js/saveInspection.js"></script>
-```
 </body>
 </html>
