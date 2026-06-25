@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const CUSTOMER_API =
-    "ใส่ URL Web App ของ Customer ตรงนี้";
+  "https://script.google.com/macros/s/AKfycbzv1IRXeBSLB1S9y-0XtcJk9m181o_UIvPctafuUKOyocYoipFbxH1z413JcGXsfR0UQg/exec";
+
 
   const customerBox = document.getElementById("customer");
 
