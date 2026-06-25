@@ -37,6 +37,8 @@ fetch(INSPECTION_ITEM_API)
 
             cell4.textContent = item.checkType;
 
+            // Result
+
             let result = createResultInput(
                 item.resultType,
                 item.itemNo
@@ -44,31 +46,18 @@ fetch(INSPECTION_ITEM_API)
 
             cell5.appendChild(result);
 
-            let remark =
-                document.createElement("input");
+            // Remark
+
+            let remark = document.createElement("input");
 
             remark.type = "text";
 
             remark.placeholder = "Remark";
 
-            remark.id =
-                "remark_" + item.itemNo;
+            remark.id = "remark_" + item.itemNo;
 
             cell6.appendChild(remark);
 
         }
 
     });
-
-})
-
-.catch(error => {
-
-    console.error(error);
-
-    alert("Inspection Item Load Error");
-
-});
-```
-
-}
