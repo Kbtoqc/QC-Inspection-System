@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <base target="_top">
   <title>QC Inspection</title>
@@ -7,32 +8,67 @@
 
 <body>
 
-<h2>QC Inspection Form</h2>
+  <h2>QC Inspection Form</h2>
 
-<div>
-  <label>Inspection Date</label>
-  <input type="date" id="inspectionDate">
-</div>
+  <div>
+    <label>Inspection Date</label>
+    <input type="date" id="inspectionDate">
+  </div>
 
-<br>
+  <br>
 
-<div>
-  <label>SO No.</label>
-  <input type="text" id="soNo" placeholder="Enter SO No.">
-</div>
+  <div>
+    <label>SO No.</label>
+    <input type="text" id="soNo" placeholder="Enter SO No.">
+  </div>
 
-<br>
+  <br>
 
-<div>
-  <label>Inspector</label>
-<select id="inspector">
-  <option value="">Select Inspector</option>
-</select>
-</div>
+  <div>
+    <label>Inspector</label>
+    <select id="inspector">
+      <option value="">Loading...</option>
+    </select>
+  </div>
 
+  <script>
 
-<script src="inspectionDate.js"></script>
-<script src="inspector.js"></script>
+    document.getElementById("inspectionDate").valueAsDate = new Date();
+
+    const INSPECTOR_API =
+      "https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1WqtvdZ3I7amsrUGgA_kAhLEdiOHGBuJV74tj/exec";
+
+    fetch(INSPECTOR_API)
+      .then(response => response.json())
+      .then(data => {
+
+        const inspectorBox = document.getElementById("inspector");
+
+        inspectorBox.innerHTML = '<option value="">Select Inspector</option>';
+
+        data.forEach(name => {
+
+          const option = document.createElement("option");
+
+          option.value = name;
+          option.textContent = name;
+
+          inspectorBox.appendChild(option);
+
+        });
+
+      })
+      .catch(error => {
+
+        console.error("Inspector Load Error:", error);
+
+        document.getElementById("inspector").innerHTML =
+          '<option value="">Load Failed</option>';
+
+      });
+
+  </script>
 
 </body>
+
 </html>
