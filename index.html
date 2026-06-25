@@ -1,181 +1,124 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>QC Inspection</title>
-</head>
-
-<body>
-
-<h2>QC Inspection Form</h2>
-
-<br>
-
-<button id="saveInspection">
-  Save Inspection
-</button>
-
-<br>
-
-<div>
-  <label>Inspection Date</label>
-  <input type="date" id="inspectionDate">
-</div>
-
-<br>
-
-<div>
-  <label>SO No.</label>
-  <input type="text" id="soNo" placeholder="Enter SO No.">
-</div>
-
-<br>
-
-<div>
-  <label>PO No.</label>
-  <input type="text" id="poNo" placeholder="Enter PO No.">
-</div>
-
-<br>
-
-<div>
-  <label>Inspector</label>
-  <select id="inspector">
-    <option value="">Select inspector</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Customer</label>
-  <select id="customer">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Supplier</label>
-  <select id="supplier">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Inspection Type</label>
-  <select id="inspectionType">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Material Type</label>
-  <select id="material">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Model</label>
-  <input type="text" id="model" placeholder="Enter Model">
-</div>
-
-<br>
-
-<div>
-  <label>Serial No.</label>
-  <input type="text" id="serialNo" placeholder="Enter Serial No.">
-</div>
-
-<br>
-
-<div>
-  <label>Inspection Checklist</label>
-
-  <table border="1" id="inspectionTable">
-
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Check Point</th>
-        <th>Spec</th>
-        <th>Check Type</th>
-        <th>Result</th>
-        <th>Remark</th>
-      </tr>
-    </thead>
-
-    <tbody id="inspectionBody">
-
-    </tbody>
-
-  </table>
-
-</div>
+console.log("Save JS Loaded");
 
 
-<br>
-
-<div>
-  <label>Final Judgement</label>
-
-  <select id="finalJudgement">
-    <option value="">Select</option>
-    <option value="Accept">Accept</option>
-    <option value="Reject">Reject</option>
-    <option value="Hold">Hold</option>
-  </select>
-
-</div>
+const saveButton = document.getElementById("saveInspection");
 
 
-<br>
-
-<div>
-  <label>Final Remark</label>
-  <br>
-
-  <textarea
-    id="finalRemark"
-    rows="6"
-    cols="80"
-    placeholder="Enter final remark">
-  </textarea>
-
-</div>
-  
-<br>
-
-<div>
-  <label>Inspection Photos</label>
-  <br>
-
-  <input
-    type="file"
-    id="inspectionPhotos"
-    accept="image/*"
-    multiple>
-
-</div>
-
-<script src="js/inspectionDate.js"></script>
-<script src="js/inspector.js"></script>
-<script src="js/customer.js"></script>
-<script src="js/supplier.js"></script>
-<script src="js/inspectionType.js"></script>
-<script src="js/material.js"></script>
-<script src="js/inspectionItem.js"></script>
-<script src="js/photoUpload.js"></script>
-<script src="js/validation.js"></script>
-<script src="js/saveInspection.js"></script>
+console.log("Save Button:", saveButton);
 
 
-</body>
-</html>
+
+if (saveButton) {
+
+
+  saveButton.onclick = function () {
+
+
+    console.log("Save Button Clicked");
+
+
+
+    const header = {
+
+
+      inspectionDate:
+      document.getElementById("inspectionDate").value,
+
+
+      soNo:
+      document.getElementById("soNo").value,
+
+
+      poNo:
+      document.getElementById("poNo").value,
+
+
+      inspector:
+      document.getElementById("inspector").value,
+
+
+      customer:
+      document.getElementById("customer").value,
+
+
+      supplier:
+      document.getElementById("supplier").value,
+
+
+      inspectionType:
+      document.getElementById("inspectionType").value,
+
+
+      materialType:
+      document.getElementById("material").value,
+
+
+      model:
+      document.getElementById("model").value,
+
+
+      serialNo:
+      document.getElementById("serialNo").value,
+
+
+      finalJudgement:
+      document.getElementById("finalJudgement").value,
+
+
+      finalRemark:
+      document.getElementById("finalRemark").value
+
+
+    };
+
+
+
+    console.log("HEADER DATA");
+
+    console.log(header);
+
+
+
+    const details = [];
+
+
+
+    document
+    .querySelectorAll("#inspectionBody tr")
+    .forEach(row => {
+
+
+      details.push({
+
+        itemNo:
+        row.cells[0].innerText,
+
+
+        checkPoint:
+        row.cells[1].innerText,
+
+
+        spec:
+        row.cells[2].innerText,
+
+
+        checkType:
+        row.cells[3].innerText
+
+      });
+
+
+    });
+
+
+
+    console.log("DETAIL DATA");
+
+    console.log(details);
+
+
+
+  };
+
+
+}
