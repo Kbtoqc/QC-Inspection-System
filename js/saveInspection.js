@@ -1,238 +1,233 @@
 function saveInspection(){
 
-    let inspectionNo = generateInspectionNo();
+```
+let inspectionNo = generateInspectionNo();
 
 
-    let headerData = {
+let headerData = {
 
-        inspectionNo: inspectionNo,
+    inspectionNo: inspectionNo,
 
-        inspectionDate:
-            document.getElementById("inspectionDate").value,
+    inspectionDate:
+        document.getElementById("inspectionDate").value,
 
-        inspector:
-            document.getElementById("inspector").value,
+    inspector:
+        document.getElementById("inspector").value,
 
-        inspectionType:
-            document.getElementById("inspectionType").value,
+    inspectionType:
+        document.getElementById("inspectionType").value,
 
-        materialType:
-            document.getElementById("material").value,
+    materialType:
+        document.getElementById("material").value,
 
-        model:
-            document.getElementById("model").value,
+    model:
+        document.getElementById("model").value,
 
-        serialNo:
-            document.getElementById("serialNo").value,
+    serialNo:
+        document.getElementById("serialNo").value,
 
-        soNo:
-            document.getElementById("soNo").value,
+    soNo:
+        document.getElementById("soNo").value,
 
-        poNo:
-            document.getElementById("poNo").value,
+    poNo:
+        document.getElementById("poNo").value,
 
-        supplier:
-            document.getElementById("supplier").value,
+    supplier:
+        document.getElementById("supplier").value,
 
-        customer:
-            document.getElementById("customer").value,
+    customer:
+        document.getElementById("customer").value,
 
-        finalJudgement:
-            document.getElementById("finalJudgement").value,
+    finalJudgement:
+        document.getElementById("finalJudgement").value,
 
-        overallRemark:
-            document.getElementById("overallRemark").value,
+    overallRemark:
+        document.getElementById("overallRemark").value,
 
-        items: []
+    items: []
+
+};
+
+
+let rows =
+    document.getElementById("inspectionBody").rows;
+
+
+for(let i = 0; i < rows.length; i++){
+
+
+    let row = rows[i];
+
+
+    let item = {
+
+        itemNo:
+            row.cells[0].innerText,
+
+        checkPoint:
+            row.cells[1].innerText,
+
+        spec:
+            row.cells[2].innerText,
+
+        checkType:
+            row.cells[3].innerText,
+
+        resultType:
+            row.dataset.resultType,
+
+        result:
+            "",
+
+        remark:
+            ""
 
     };
 
 
-
-    let rows = document
-        .getElementById("inspectionBody")
-        .rows;
-
-
-
-    for(let i = 0; i < rows.length; i++){
+    let checkedRadio =
+        row.cells[4].querySelector(
+            'input[type="radio"]:checked'
+        );
 
 
-        let row = rows[i];
+    if(checkedRadio){
 
+        item.result =
+            checkedRadio.value;
 
-        let item = {
+    }
+    else{
 
-            itemNo:
-                row.cells[0].innerText,
+        let textInput =
+            row.cells[4].querySelector(
+                'input[type="text"]'
+            );
 
-            checkPoint:
-                row.cells[1].innerText,
-
-            spec:
-                row.cells[2].innerText,
-
-            checkType:
-                row.cells[3].innerText,
-
-
-            resultType:
-                row.cells[3].innerText,
-
-
-            result:
-                "",
-
-
-            remark:
-                ""
-
-        };
-
-
-
-        let resultElement =
-            row.cells[4].querySelector("select, input, textarea");
-
-
-        if(resultElement){
+        if(textInput){
 
             item.result =
-                resultElement.value;
+                textInput.value;
 
         }
-
-
-
-        let remarkElement =
-            row.cells[5].querySelector("input, textarea");
-
-
-        if(remarkElement){
-
-            item.remark =
-                remarkElement.value;
-
-        }
-
-
-
-        headerData.items.push(item);
 
     }
 
 
+    let remarkElement =
+        row.cells[5].querySelector(
+            "input, textarea"
+        );
 
-    if(headerData.items.length === 0){
 
-        alert("No inspection item found");
+    if(remarkElement){
 
-        return;
+        item.remark =
+            remarkElement.value;
 
     }
 
 
-
-    fetch(
-    "https://script.google.com/macros/s/AKfycbyAGKN_dGTq2GtmPVznU8EccXFlqhXfd2o9isaIoirQLAhU7SHN6VWhScGaWPDuixpz/exec",
-    {
-
-        method:"POST",
-
-        body:JSON.stringify(headerData)
-
-    })
-
-
-    .then(response => response.text())
-
-
-    .then(data=>{
-
-
-        alert(
-            "Save Complete\n" + inspectionNo
-        );
-
-
-        console.log(data);
-        
-        location.reload();
-
-    })
-
-
-    .catch(error=>{
-
-
-        alert(
-            "Save Failed\n" + error
-        );
-
-
-        console.error(error);
-
-
-    });
-
-
+    headerData.items.push(item);
 
 }
 
 
+if(headerData.items.length === 0){
 
+    alert("No inspection item found");
+
+    return;
+
+}
+
+
+fetch(
+"https://script.google.com/macros/s/AKfycbyAGKN_dGTq2GtmPVznU8EccXFlqhXfd2o9isaIoirQLAhU7SHN6VWhScGaWPDuixpz/exec",
+{
+
+    method:"POST",
+
+    body:JSON.stringify(headerData)
+
+})
+
+
+.then(response => response.text())
+
+
+.then(data=>{
+
+    alert(
+        "Save Complete\n" +
+        inspectionNo
+    );
+
+    console.log(data);
+
+    location.reload();
+
+})
+
+
+.catch(error=>{
+
+    alert(
+        "Save Failed\n" +
+        error
+    );
+
+    console.error(error);
+
+});
+```
+
+}
 
 function generateInspectionNo(){
 
-
-    let today =
-        new Date();
-
-
-
-    let yyyy =
-        today.getFullYear();
+```
+let today =
+    new Date();
 
 
-
-    let mm =
-        String(today.getMonth()+1)
-        .padStart(2,"0");
+let yyyy =
+    today.getFullYear();
 
 
-
-    let dd =
-        String(today.getDate())
-        .padStart(2,"0");
-
+let mm =
+    String(today.getMonth()+1)
+    .padStart(2,"0");
 
 
-    let hh =
-        String(today.getHours())
-        .padStart(2,"0");
+let dd =
+    String(today.getDate())
+    .padStart(2,"0");
 
 
-
-    let mi =
-        String(today.getMinutes())
-        .padStart(2,"0");
-
+let hh =
+    String(today.getHours())
+    .padStart(2,"0");
 
 
-    let ss =
-        String(today.getSeconds())
-        .padStart(2,"0");
+let mi =
+    String(today.getMinutes())
+    .padStart(2,"0");
 
 
+let ss =
+    String(today.getSeconds())
+    .padStart(2,"0");
 
-    return "INS-"
-        + yyyy
-        + mm
-        + dd
-        + "-"
-        + hh
-        + mi
-        + ss;
 
+return "INS-"
+    + yyyy
+    + mm
+    + dd
+    + "-"
+    + hh
+    + mi
+    + ss;
+```
 
 }
