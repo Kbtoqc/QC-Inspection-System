@@ -1,31 +1,23 @@
-const INSPECTOR_API = "https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1WqtvdZ3I7amsrUGgA_kAhLEdiOHGBuJV74tj/exec";
+document.addEventListener("DOMContentLoaded", () => {
 
-console.log("Inspector JS Loaded");
-
-window.onload = function() {
+  const INSPECTOR_API =
+    "https://script.google.com/macros/s/AKfycby-rz0BE7Q04J7CixQ4XRYJMcbo4Wo1WqtvdZ3I7amsrUGgA_kAhLEdiOHGBuJV74tj/exec";
 
   const inspectorBox = document.getElementById("inspector");
 
-  console.log("Inspector Box:", inspectorBox);
-
   fetch(INSPECTOR_API)
-    .then(response => {
-
-      console.log("API Response:", response);
-
-      return response.json();
-
-    })
+    .then(response => response.json())
     .then(data => {
 
-      console.log("Inspector Data:", data);
+      inspectorBox.innerHTML =
+        '<option value="">Select Inspector</option>';
 
       data.forEach(name => {
 
-        let option = document.createElement("option");
+        const option = document.createElement("option");
 
         option.value = name;
-        option.text = name;
+        option.textContent = name;
 
         inspectorBox.appendChild(option);
 
@@ -34,8 +26,11 @@ window.onload = function() {
     })
     .catch(error => {
 
-      console.log("Inspector Load Error:", error);
+      console.error("Inspector Load Error:", error);
+
+      inspectorBox.innerHTML =
+        '<option value="">Load Failed</option>';
 
     });
 
-};
+});
