@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+
+<meta charset="UTF-8">
+<title>QC Inspection Photo Upload</title>
+
+</head>
+
+<body>
+
+<h2>QC Inspection Photo Upload</h2>
+
+<br>
+
+<div>
+
+<label>Inspection ID</label>
+
+<input
+type="text"
+id="inspectionID"
+placeholder="INSP-XXXXXXXXXXXXXX"
+style="width:300px;">
+
+</div>
+
+<br>
+
+<div>
+
+<label>Select Photos</label>
+
+<br><br>
+
+<input
+type="file"
+id="photos"
+accept="image/*"
+multiple>
+
+</div>
+
+<br>
+
+<div>
+
+<b>Selected Files</b>
+
+<ul id="fileList">
+
+</ul>
+
+</div>
+
+<br>
+
+<button id="uploadButton">
+
+Upload Photos
+
+</button>
+
+<br><br>
+
+<div id="status"></div>
+
+<script src="js/photoUpload.js"></script>
+
+</body>
+
+</html>
