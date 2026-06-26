@@ -122,5 +122,6 @@ function clearForm() {
 
   document.getElementById("inspectionDate").value =
     `${yyyy}-${mm}-${dd}`;
-
+  
+  validateForm();
 }
