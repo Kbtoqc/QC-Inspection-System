@@ -1,14 +1,15 @@
 console.log("Save JS Loaded");
 
+const SAVE_API =
+  "https://script.google.com/macros/s/AKfycbyAGKN_dGTq2GtmPVznU8EccXFlqhXfd2o9isaIoirQLAhU7SHN6VWhScGaWPDuixpz/exec";
+
 const saveButton = document.getElementById("saveInspection");
 
 console.log("Save Button:", saveButton);
 
 if (saveButton) {
 
-  saveButton.onclick = function () {
-
-    console.log("Save Button Clicked");
+  saveButton.onclick = async function () {
 
     const header = {
 
@@ -38,8 +39,6 @@ if (saveButton) {
 
     };
 
-    console.log("========== HEADER ==========");
-    console.table(header);
 
     const details = [];
 
@@ -63,11 +62,44 @@ if (saveButton) {
 
     });
 
-    console.log("========== DETAIL ==========");
-    console.table(details);
 
-    console.log("Header Record :", 1);
-    console.log("Detail Record :", details.length);
+    const data = {
+
+      header: header,
+
+      details: details
+
+    };
+
+    console.log(data);
+
+    saveButton.disabled = true;
+    saveButton.innerText = "Saving...";
+
+    try {
+
+      const response = await fetch(SAVE_API, {
+
+        method: "POST",
+
+        body: JSON.stringify(data)
+
+      });
+
+      const result = await response.text();
+
+      alert(result);
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Save Failed");
+
+    }
+
+    saveButton.disabled = false;
+    saveButton.innerText = "Save Inspection";
 
   };
 
