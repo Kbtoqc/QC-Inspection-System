@@ -1,55 +1,40 @@
+function validateForm() {
+
+  const inspectionDate = document.getElementById("inspectionDate").value;
+  const inspector = document.getElementById("inspector").value;
+  const inspectionType = document.getElementById("inspectionType").value;
+  const material = document.getElementById("material").value;
+  const finalJudgement = document.getElementById("finalJudgement").value;
+
+  const saveButton = document.getElementById("saveInspection");
+
+  const isValid =
+    inspectionDate !== "" &&
+    inspector !== "" &&
+    inspectionType !== "" &&
+    material !== "" &&
+    finalJudgement !== "";
+
+  saveButton.disabled = !isValid;
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  const inspectionDate =
-    document.getElementById("inspectionDate");
+  document.getElementById("saveInspection").disabled = true;
 
-  const inspector =
-    document.getElementById("inspector");
+  [
+    "inspectionDate",
+    "inspector",
+    "inspectionType",
+    "material",
+    "finalJudgement"
+  ].forEach(id => {
 
-  const inspectionType =
-    document.getElementById("inspectionType");
+    document
+      .getElementById(id)
+      .addEventListener("change", validateForm);
 
-  const material =
-    document.getElementById("material");
-
-  const finalJudgement =
-    document.getElementById("finalJudgement");
-
-  const saveButton =
-    document.getElementById("saveInspection");
-
-
-  function validateForm() {
-
-    const isValid =
-
-      inspectionDate.value.trim() !== "" &&
-
-      inspector.value.trim() !== "" &&
-
-      inspectionType.value.trim() !== "" &&
-
-      material.value.trim() !== "" &&
-
-      finalJudgement.value.trim() !== "";
-
-
-    saveButton.disabled = !isValid;
-
-  }
-
-
-  inspectionDate.addEventListener("change", validateForm);
-
-  inspector.addEventListener("change", validateForm);
-
-  inspectionType.addEventListener("change", validateForm);
-
-  material.addEventListener("change", validateForm);
-
-  finalJudgement.addEventListener("change", validateForm);
-
-
-  validateForm();
+  });
 
 });
