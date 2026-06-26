@@ -1,35 +1,16 @@
-function validateForm() {
-
-  const inspectionDate = document.getElementById("inspectionDate").value;
-  const inspector = document.getElementById("inspector").value;
-  const inspectionType = document.getElementById("inspectionType").value;
-  const material = document.getElementById("material").value;
-  const finalJudgement = document.getElementById("finalJudgement").value;
-
-  const saveButton = document.getElementById("saveInspection");
-
-  const isValid =
-    inspectionDate !== "" &&
-    inspector !== "" &&
-    inspectionType !== "" &&
-    material !== "" &&
-    finalJudgement !== "";
-
-  saveButton.disabled = !isValid;
-
-}
-
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("saveInspection").disabled = true;
+  const requiredFields = [
 
-  [
     "inspectionDate",
     "inspector",
     "inspectionType",
     "material",
     "finalJudgement"
-  ].forEach(id => {
+
+  ];
+
+  requiredFields.forEach(id => {
 
     document
       .getElementById(id)
@@ -37,4 +18,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
+  validateForm();
+
 });
+
+
+function validateForm() {
+
+  const inspectionDate =
+    document.getElementById("inspectionDate").value.trim();
+
+  const inspector =
+    document.getElementById("inspector").value.trim();
+
+  const inspectionType =
+    document.getElementById("inspectionType").value.trim();
+
+  const material =
+    document.getElementById("material").value.trim();
+
+  const finalJudgement =
+    document.getElementById("finalJudgement").value.trim();
+
+  const saveButton =
+    document.getElementById("saveInspection");
+
+  const enable =
+
+    inspectionDate !== "" &&
+    inspector !== "" &&
+    inspectionType !== "" &&
+    material !== "" &&
+    finalJudgement !== "";
+
+  saveButton.disabled = !enable;
+
+}
