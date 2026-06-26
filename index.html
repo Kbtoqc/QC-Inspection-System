@@ -1,6 +1,8 @@
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
+  <meta charset="UTF-8">
   <title>QC Inspection</title>
 </head>
 
@@ -10,39 +12,37 @@
 
 <br>
 
-<div>
-  <button id=""saveInspection"" disabled>
-    Save Inspection
-  </button>
-</div>
+<button id="saveInspection">
+  Save Inspection
+</button>
 
 <br>
 
 <div>
   <label>Inspection Date</label>
-  <input type=""date"" id=""inspectionDate"">
+  <input type="date" id="inspectionDate">
 </div>
 
 <br>
 
 <div>
   <label>SO No.</label>
-  <input type=""text"" id=""soNo"" placeholder=""Enter SO No."">
+  <input type="text" id="soNo" placeholder="Enter SO No.">
 </div>
 
 <br>
 
 <div>
   <label>PO No.</label>
-  <input type=""text"" id=""poNo"" placeholder=""Enter PO No."">
+  <input type="text" id="poNo" placeholder="Enter PO No.">
 </div>
 
 <br>
 
 <div>
   <label>Inspector</label>
-  <select id=""inspector"">
-    <option value="""">Select inspector</option>
+  <select id="inspector">
+    <option value="">Select Inspector</option>
   </select>
 </div>
 
@@ -50,8 +50,8 @@
 
 <div>
   <label>Customer</label>
-  <select id=""customer"">
-    <option value="""">Loading...</option>
+  <select id="customer">
+    <option value="">Loading...</option>
   </select>
 </div>
 
@@ -59,8 +59,8 @@
 
 <div>
   <label>Supplier</label>
-  <select id=""supplier"">
-    <option value="""">Loading...</option>
+  <select id="supplier">
+    <option value="">Loading...</option>
   </select>
 </div>
 
@@ -68,8 +68,8 @@
 
 <div>
   <label>Inspection Type</label>
-  <select id=""inspectionType"">
-    <option value="""">Loading...</option>
+  <select id="inspectionType">
+    <option value="">Loading...</option>
   </select>
 </div>
 
@@ -77,8 +77,8 @@
 
 <div>
   <label>Material Type</label>
-  <select id=""material"">
-    <option value="""">Loading...</option>
+  <select id="material">
+    <option value="">Loading...</option>
   </select>
 </div>
 
@@ -86,14 +86,14 @@
 
 <div>
   <label>Model</label>
-  <input type=""text"" id=""model"" placeholder=""Enter Model"">
+  <input type="text" id="model" placeholder="Enter Model">
 </div>
 
 <br>
 
 <div>
   <label>Serial No.</label>
-  <input type=""text"" id=""serialNo"" placeholder=""Enter Serial No."">
+  <input type="text" id="serialNo" placeholder="Enter Serial No.">
 </div>
 
 <br>
@@ -101,7 +101,7 @@
 <div>
   <label>Inspection Checklist</label>
 
-  <table border=""1"" id=""inspectionTable"">
+  <table border="1" id="inspectionTable">
 
     <thead>
       <tr>
@@ -114,68 +114,69 @@
       </tr>
     </thead>
 
-    <tbody id=""inspectionBody"">
-
+    <tbody id="inspectionBody">
     </tbody>
 
   </table>
 
 </div>
 
-
 <br>
 
 <div>
+
   <label>Final Judgement</label>
 
-  <select id=""finalJudgement"">
-    <option value="""">Select</option>
-    <option value=""Accept"">Accept</option>
-    <option value=""Reject"">Reject</option>
-    <option value=""Hold"">Hold</option>
+  <select id="finalJudgement">
+    <option value="">Select</option>
+    <option value="Accept">Accept</option>
+    <option value="Reject">Reject</option>
+    <option value="Hold">Hold</option>
   </select>
 
 </div>
 
-
 <br>
 
 <div>
+
   <label>Final Remark</label>
   <br>
 
   <textarea
-    id=""finalRemark""
-    rows=""6""
-    cols=""80""
-    placeholder=""Enter final remark"">
-  </textarea>
+    id="finalRemark"
+    rows="6"
+    cols="80"
+    placeholder="Enter final remark"></textarea>
 
 </div>
-  
+
 <br>
 
 <div>
+
   <label>Inspection Photos</label>
   <br>
 
   <input
-    type=""file""
-    id=""inspectionPhotos""
-    accept=""image/*""
+    type="file"
+    id="inspectionPhotos"
+    accept="image/*"
     multiple>
 
 </div>
 
-<script src=""js/inspectionDate.js""></script>
-<script src=""js/inspector.js""></script>
-<script src=""js/customer.js""></script>
-<script src=""js/supplier.js""></script>
-<script src=""js/inspectionType.js""></script>
-<script src=""js/material.js""></script>
-<script src=""js/inspectionItem.js""></script>
-<script src=""js/photoUpload.js""></script>
-<script src=""js/validation.js""></script>
+<script src="js/inspectionDate.js"></script>
+<script src="js/inspector.js"></script>
+<script src="js/customer.js"></script>
+<script src="js/supplier.js"></script>
+<script src="js/inspectionType.js"></script>
+<script src="js/material.js"></script>
+<script src="js/inspectionItem.js"></script>
+<script src="js/photoUpload.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/saveInspection.js"></script>
 
 </body>
-</html>"
+
+</html>
