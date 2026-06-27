@@ -1,157 +1,118 @@
 console.log("Photo Upload JS Loaded");
 
-
 const params = new URLSearchParams(window.location.search);
-
-
 const inspectionID = params.get("id");
 
-
-const inspectionBox =
-document.getElementById("inspectionID");
-
-
-if(inspectionID){
-
-    inspectionBox.value = inspectionID;
-
-}
-else{
-
-    alert("Invalid Inspection ID");
-
-}
-
-
-
-const uploadButton =
-document.getElementById("uploadButton");
-
-
-const photoInput =
-document.getElementById("photos");
-
-
-const fileList =
-document.getElementById("fileList");
-
-
-const statusBox =
-document.getElementById("status");
-
-
+const inspectionBox = document.getElementById("inspectionID");
+const uploadButton = document.getElementById("uploadButton");
+const photoInput = document.getElementById("photos");
+const fileList = document.getElementById("fileList");
+const statusBox = document.getElementById("status");
 
 const PHOTO_UPLOAD_API =
 "https://script.google.com/macros/s/AKfycbyx5BWuoCALxEIkaJN7a93NOtHSYD7t8XDPjkwTcEtXshmDwWZ14OSILhbBr5Z3WFdo2A/exec";
 
+if (inspectionID) {
 
+    inspectionBox.value = inspectionID;
+    inspectionBox.readOnly = true;
 
+} else {
 
-photoInput.onchange=function(){
+    alert("Invalid Inspection ID");
+    uploadButton.disabled = true;
 
+}
 
-fileList.innerHTML="";
+photoInput.onchange = function () {
 
+    fileList.innerHTML = "";
 
-Array.from(this.files).forEach(file=>{
+    Array.from(photoInput.files).forEach(file => {
 
+        const li = document.createElement("li");
+        li.innerText = file.name;
+        fileList.appendChild(li);
 
-let li=document.createElement("li");
-
-li.innerText=file.name;
-
-fileList.appendChild(li);
-
-
-});
-
+    });
 
 };
 
+uploadButton.onclick = async function () {
 
+    if (!inspectionID) {
 
+        alert("Inspection ID Missing");
+        return;
 
-uploadButton.onclick=async function(){
+    }
 
+    if (photoInput.files.length === 0) {
 
-if(!inspectionID){
+        alert("Please select photo");
+        return;
 
-alert("Inspection ID Missing");
+    }
 
-return;
+    uploadButton.disabled = true;
+    statusBox.innerHTML = "Uploading...";
 
-}
+    try {
 
+        for (let i = 0; i < photoInput.files.length; i++) {
 
-if(photoInput.files.length===0){
+            const file = photoInput.files[i];
 
-alert("Please select photo");
+            const base64 = await new Promise(resolve => {
 
-return;
+                const reader = new FileReader();
 
-}
+                reader.onload = function () {
 
+                    resolve(reader.result.split(",")[1]);
 
+                };
 
-uploadButton.disabled=true;
+                reader.readAsDataURL(file);
 
+            });
 
-for(let i=0;i<photoInput.files.length;i++){
+            await fetch(PHOTO_UPLOAD_API, {
 
+                method: "POST",
 
-let file=photoInput.files[i];
+                body: JSON.stringify({
 
+                    inspectionID: inspectionID,
+                    fileNo: i + 1,
+                    fileName: file.name,
+                    mimeType: file.type,
+                    base64: base64
 
-let base64 = await new Promise(resolve=>{
+                })
 
+            });
 
-let reader=new FileReader();
+            statusBox.innerHTML =
+                "Uploading " + (i + 1) + " / " + photoInput.files.length;
 
+        }
 
-reader.onload=function(){
+        alert("Upload Complete");
 
-resolve(reader.result.split(",")[1]);
+        // กลับไปหน้าแรกและเคลียร์ฟอร์ม
+        window.location.href =
+        "index.html?finish=1";
 
-};
+    }
+    catch (err) {
 
+        console.error(err);
 
-reader.readAsDataURL(file);
+        alert("Upload Failed");
 
+        uploadButton.disabled = false;
 
-});
-
-
-
-await fetch(PHOTO_UPLOAD_API,{
-
-method:"POST",
-
-body:JSON.stringify({
-
-inspectionID:inspectionID,
-
-fileNo:i+1,
-
-fileName:file.name,
-
-mimeType:file.type,
-
-base64:base64
-
-})
-
-});
-
-
-statusBox.innerHTML =
-"Uploaded "+(i+1)+" / "+photoInput.files.length;
-
-
-}
-
-
-
-alert("Upload Complete");
-
+    }
 
 };
