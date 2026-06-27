@@ -1,18 +1,13 @@
 console.log("Save JS Loaded");
 
-
 const SAVE_API =
 "https://script.google.com/macros/s/AKfycbyAGKN_dGTq2GtmPVznU8EccXFlqhXfd2o9isaIoirQLAhU7SHN6VWhScGaWPDuixpz/exec";
 
-
 let currentInspectionID = "";
-
 
 const saveButton = document.getElementById("saveInspection");
 
-
-saveButton.onclick = async function(){
-
+saveButton.onclick = async function () {
 
     const header = {
 
@@ -31,11 +26,9 @@ saveButton.onclick = async function(){
 
     };
 
+    const details = [];
 
-    const details=[];
-
-
-    document.querySelectorAll("#inspectionBody tr").forEach(row=>{
+    document.querySelectorAll("#inspectionBody tr").forEach(row => {
 
         details.push({
 
@@ -50,150 +43,131 @@ saveButton.onclick = async function(){
 
     });
 
+    saveButton.disabled = true;
+    saveButton.innerText = "Saving...";
 
-    saveButton.disabled=true;
-    saveButton.innerText="Saving...";
+    try {
 
+        const response = await fetch(SAVE_API, {
 
-    try{
+            method: "POST",
 
+            body: JSON.stringify({
 
-        const response = await fetch(SAVE_API,{
-
-            method:"POST",
-
-            body:JSON.stringify({
-
-                header:header,
-                details:details
+                header: header,
+                details: details
 
             })
 
         });
 
-
-
         const result = await response.json();
 
-
-
-        if(result.status==="success"){
-
+        if (result.status === "success") {
 
             currentInspectionID = result.inspectionID;
 
+            document.getElementById("afterSave").style.display = "block";
 
-            document.getElementById("afterSave").style.display="block";
+            saveButton.style.display = "none";
 
-
-            saveButton.style.display="none";
-
-
-        }
-        else{
-
+        } else {
 
             alert(result.message);
 
-
-            saveButton.disabled=false;
-            saveButton.innerText="Save Inspection";
-
+            saveButton.disabled = false;
+            saveButton.innerText = "Save Inspection";
 
         }
 
-
-
-    }
-    catch(error){
-
+    } catch (error) {
 
         console.error(error);
 
         alert("Save Failed");
 
-
-        saveButton.disabled=false;
-        saveButton.innerText="Save Inspection";
-
+        saveButton.disabled = false;
+        saveButton.innerText = "Save Inspection";
 
     }
 
+};
+
+document.getElementById("uploadPhotoButton").onclick = function () {
+
+    const photoWindow = window.open(
+        "photoUpload.html?id=" + currentInspectionID,
+        "photoUpload",
+        "width=1000,height=800"
+    );
+
+    // ตรวจว่าหน้าต่าง Upload ปิดเมื่อไร
+    const timer = setInterval(function () {
+
+        if (photoWindow.closed) {
+
+            clearInterval(timer);
+
+            clearForm();
+
+            document.getElementById("afterSave").style.display = "none";
+
+            saveButton.style.display = "inline-block";
+
+            saveButton.disabled = false;
+
+            saveButton.innerText = "Save Inspection";
+
+            currentInspectionID = "";
+
+        }
+
+    }, 500);
 
 };
 
-
-
-
-
-document.getElementById("uploadPhotoButton").onclick=function(){
-
-
-    window.open(
-    "photoUpload.html?id=" + currentInspectionID,
-    "photoUpload",
-    "width=1000,height=800"
-);
-
-
-};
-
-
-
-
-
-document.getElementById("finishButton").onclick=function(){
-
+document.getElementById("finishButton").onclick = function () {
 
     clearForm();
 
+    document.getElementById("afterSave").style.display = "none";
 
-    document.getElementById("afterSave").style.display="none";
+    saveButton.style.display = "inline-block";
 
+    saveButton.disabled = false;
 
-    saveButton.style.display="block";
+    saveButton.innerText = "Save Inspection";
 
-
-    saveButton.disabled=false;
-
-
-    saveButton.innerText="Save Inspection";
-
+    currentInspectionID = "";
 
 };
 
+function clearForm() {
 
+    document.getElementById("soNo").value = "";
+    document.getElementById("poNo").value = "";
 
+    document.getElementById("model").value = "";
+    document.getElementById("serialNo").value = "";
 
+    document.getElementById("finalRemark").value = "";
 
-function clearForm(){
+    document.getElementById("inspector").selectedIndex = 0;
+    document.getElementById("customer").selectedIndex = 0;
+    document.getElementById("supplier").selectedIndex = 0;
+    document.getElementById("inspectionType").selectedIndex = 0;
+    document.getElementById("material").selectedIndex = 0;
+    document.getElementById("finalJudgement").selectedIndex = 0;
 
+    document.getElementById("inspectionBody").innerHTML = "";
 
-document.getElementById("soNo").value="";
-document.getElementById("poNo").value="";
+    const today = new Date();
 
-document.getElementById("model").value="";
-document.getElementById("serialNo").value="";
+    document.getElementById("inspectionDate").value =
+        today.toISOString().split("T")[0];
 
-document.getElementById("finalRemark").value="";
-
-
-document.getElementById("inspector").selectedIndex=0;
-document.getElementById("customer").selectedIndex=0;
-document.getElementById("supplier").selectedIndex=0;
-document.getElementById("inspectionType").selectedIndex=0;
-document.getElementById("material").selectedIndex=0;
-document.getElementById("finalJudgement").selectedIndex=0;
-
-
-document.getElementById("inspectionBody").innerHTML="";
-
-
-const today=new Date();
-
-
-document.getElementById("inspectionDate").value =
-today.toISOString().split("T")[0];
-
+    if (typeof validateForm === "function") {
+        validateForm();
+    }
 
 }
