@@ -1,110 +1,160 @@
 console.log("Photo Upload JS Loaded");
 
-const uploadButton = document.getElementById("uploadButton");
-const photoInput = document.getElementById("photos");
-const fileList = document.getElementById("fileList");
-const statusBox = document.getElementById("status");
+
+const params = new URLSearchParams(window.location.search);
+
+const inspectionID =
+params.get("id");
+
+
+if(inspectionID){
+
+document.getElementById("inspectionID").value =
+inspectionID;
+
+}
+
+
+
+const uploadButton =
+document.getElementById("uploadButton");
+
+
+const photoInput =
+document.getElementById("photos");
+
+
+const fileList =
+document.getElementById("fileList");
+
+
+const statusBox =
+document.getElementById("status");
+
+
 
 const PHOTO_UPLOAD_API =
 "https://script.google.com/macros/s/AKfycbyx5BWuoCALxEIkaJN7a93NOtHSYD7t8XDPjkwTcEtXshmDwWZ14OSILhbBr5Z3WFdo2A/exec";
 
-photoInput.addEventListener("change", function () {
 
-    fileList.innerHTML = "";
 
-    Array.from(this.files).forEach(file => {
+photoInput.onchange=function(){
 
-        const li = document.createElement("li");
-        li.innerText = file.name;
 
-        fileList.appendChild(li);
+fileList.innerHTML="";
 
-    });
+
+Array.from(this.files).forEach(file=>{
+
+
+const li=document.createElement("li");
+
+li.innerText=file.name;
+
+fileList.appendChild(li);
+
 
 });
 
-uploadButton.onclick = async function () {
 
-    const inspectionID =
-        document.getElementById("inspectionID").value.trim();
+};
 
-    if (inspectionID === "") {
 
-        alert("Please enter Inspection ID");
-        return;
 
-    }
 
-    if (photoInput.files.length === 0) {
+uploadButton.onclick=async function(){
 
-        alert("Please select photo");
-        return;
 
-    }
+const id =
+document.getElementById("inspectionID").value.trim();
 
-    uploadButton.disabled = true;
 
-    statusBox.innerHTML = "Uploading...";
 
-    for (let i = 0; i < photoInput.files.length; i++) {
+if(!id){
 
-        const file = photoInput.files[i];
+alert("Inspection ID Missing");
 
-        const reader = new FileReader();
+return;
 
-        const base64 = await new Promise(resolve => {
+}
 
-            reader.onload = () => {
 
-                resolve(reader.result.split(",")[1]);
+if(photoInput.files.length===0){
 
-            };
+alert("Please select photo");
 
-            reader.readAsDataURL(file);
+return;
 
-        });
+}
 
-        const data = {
 
-            inspectionID: inspectionID,
 
-            fileNo: i + 1,
+uploadButton.disabled=true;
 
-            fileName: file.name,
+statusBox.innerHTML="Uploading...";
 
-            mimeType: file.type,
 
-            base64: base64
 
-        };
+for(let i=0;i<photoInput.files.length;i++){
 
-        const response = await fetch(PHOTO_UPLOAD_API, {
 
-            method: "POST",
+const file=photoInput.files[i];
 
-            body: JSON.stringify(data)
 
-        });
+const base64 =
+await new Promise(resolve=>{
 
-        const result = await response.text();
 
-        statusBox.innerHTML =
-            "Uploading " +
-            (i + 1) +
-            " / " +
-            photoInput.files.length +
-            "<br>" +
-            result;
+const reader=new FileReader();
 
-    }
 
-    alert("Upload Complete");
+reader.onload=()=>{
 
-    document.getElementById("inspectionID").value = "";
-    photoInput.value = "";
-    fileList.innerHTML = "";
-    statusBox.innerHTML = "";
+resolve(reader.result.split(",")[1]);
 
-    uploadButton.disabled = false;
+};
+
+
+reader.readAsDataURL(file);
+
+
+});
+
+
+
+await fetch(PHOTO_UPLOAD_API,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+inspectionID:id,
+
+fileNo:i+1,
+
+fileName:file.name,
+
+mimeType:file.type,
+
+base64:base64
+
+})
+
+});
+
+
+statusBox.innerHTML =
+"Uploaded "+(i+1)+" / "+photoInput.files.length;
+
+
+}
+
+
+
+alert("Upload Complete");
+
+
+uploadButton.disabled=false;
+
 
 };
