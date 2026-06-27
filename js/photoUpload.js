@@ -6,7 +6,7 @@ const fileList = document.getElementById("fileList");
 const statusBox = document.getElementById("status");
 
 const PHOTO_UPLOAD_API =
-"https://SCRIPT_URL";
+"https://script.google.com/macros/s/AKfycbyx5BWuoCALxEIkaJN7a93NOtHSYD7t8XDPjkwTcEtXshmDwWZ14OSILhbBr5Z3WFdo2A/exec";
 
 photoInput.addEventListener("change", function () {
 
