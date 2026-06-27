@@ -129,8 +129,11 @@ saveButton.onclick = async function(){
 document.getElementById("uploadPhotoButton").onclick=function(){
 
 
-    window.location.href =
-    "photoUpload.html?id="+currentInspectionID;
+    window.open(
+    "photoUpload.html?id=" + currentInspectionID,
+    "photoUpload",
+    "width=1000,height=800"
+);
 
 
 };
