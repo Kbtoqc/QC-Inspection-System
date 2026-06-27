@@ -7,19 +7,13 @@ const SAVE_API =
 
 const saveButton = document.getElementById("saveInspection");
 
-
 let currentInspectionID = "";
-
-
-
-if (saveButton) {
 
 
 saveButton.onclick = async function(){
 
 
 const header = {
-
 
 inspectionDate: document.getElementById("inspectionDate").value,
 soNo: document.getElementById("soNo").value,
@@ -34,45 +28,30 @@ serialNo: document.getElementById("serialNo").value,
 finalJudgement: document.getElementById("finalJudgement").value,
 finalRemark: document.getElementById("finalRemark").value
 
-
 };
 
 
-
-const details = [];
+const details=[];
 
 
 document.querySelectorAll("#inspectionBody tr").forEach(row=>{
 
-
 details.push({
 
-itemNo: row.cells[0].innerText,
-checkPoint: row.cells[1].innerText,
-spec: row.cells[2].innerText,
-checkType: row.cells[3].innerText,
-result: row.querySelector(".result").value,
-remark: row.querySelector(".remark").value
+itemNo:row.cells[0].innerText,
+checkPoint:row.cells[1].innerText,
+spec:row.cells[2].innerText,
+checkType:row.cells[3].innerText,
+result:row.querySelector(".result").value,
+remark:row.querySelector(".remark").value
+
+});
 
 });
 
 
-});
-
-
-
-const data = {
-
-header:header,
-details:details
-
-};
-
-
-
-saveButton.disabled = true;
+saveButton.disabled=true;
 saveButton.innerText="Saving...";
-
 
 
 try{
@@ -82,37 +61,44 @@ const response = await fetch(SAVE_API,{
 
 method:"POST",
 
-body:JSON.stringify(data)
+body:JSON.stringify({
+
+header:header,
+details:details
+
+})
 
 });
 
 
 
-const result = await response.json();
+const text = await response.text();
+
+console.log("Server Response:",text);
+
+
+
+const result = JSON.parse(text);
 
 
 
 if(result.status==="success"){
 
 
-currentInspectionID = result.inspectionID;
-
+currentInspectionID=result.inspectionID;
 
 
 document.getElementById("afterSave").style.display="block";
 
 
-
 saveButton.style.display="none";
 
 
-
 }
+
 else{
 
-
 alert(result.message);
-
 
 }
 
@@ -120,74 +106,44 @@ alert(result.message);
 
 }catch(error){
 
-
 console.error(error);
 
 alert("Save Failed");
 
-
 }
 
 
 
 };
 
-}
 
 
-
-
-// Upload Photo Button
-
-const uploadPhotoButton =
-document.getElementById("uploadPhotoButton");
-
-
-if(uploadPhotoButton){
-
-
-uploadPhotoButton.onclick=function(){
+document.getElementById("uploadPhotoButton").onclick=function(){
 
 
 window.location.href =
-"photoUpload.html?id=" + currentInspectionID;
+"photoUpload.html?id="+currentInspectionID;
 
 
 };
 
 
-}
 
-
-
-
-// Finish Button
-
-const finishButton =
-document.getElementById("finishButton");
-
-
-if(finishButton){
-
-
-finishButton.onclick=function(){
+document.getElementById("finishButton").onclick=function(){
 
 
 clearForm();
 
-
 document.getElementById("afterSave").style.display="none";
-
 
 saveButton.style.display="block";
 
+saveButton.disabled=false;
+
+saveButton.innerText="Save Inspection";
+
 
 };
-
-
-}
-
-
 
 
 
@@ -197,40 +153,25 @@ function clearForm(){
 document.getElementById("soNo").value="";
 document.getElementById("poNo").value="";
 
-
 document.getElementById("inspector").selectedIndex=0;
 document.getElementById("customer").selectedIndex=0;
 document.getElementById("supplier").selectedIndex=0;
 document.getElementById("inspectionType").selectedIndex=0;
 document.getElementById("material").selectedIndex=0;
 
-
 document.getElementById("model").value="";
 document.getElementById("serialNo").value="";
-
 
 document.getElementById("finalJudgement").selectedIndex=0;
 document.getElementById("finalRemark").value="";
 
-
 document.getElementById("inspectionBody").innerHTML="";
-
 
 
 const today=new Date();
 
-
-const yyyy=today.getFullYear();
-const mm=String(today.getMonth()+1).padStart(2,"0");
-const dd=String(today.getDate()).padStart(2,"0");
-
-
 document.getElementById("inspectionDate").value =
-`${yyyy}-${mm}-${dd}`;
-
-
-
-validateForm();
+today.toISOString().split("T")[0];
 
 
 }
