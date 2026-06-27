@@ -47,6 +47,8 @@ saveButton.onclick = async function () {
     saveButton.innerText = "Saving...";
 
     try {
+        
+        console.log(details);
 
         const response = await fetch(SAVE_API, {
 
