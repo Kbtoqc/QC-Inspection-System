@@ -3,14 +3,22 @@ console.log("Photo Upload JS Loaded");
 
 const params = new URLSearchParams(window.location.search);
 
-const inspectionID =
-params.get("id");
+
+const inspectionID = params.get("id");
+
+
+const inspectionBox =
+document.getElementById("inspectionID");
 
 
 if(inspectionID){
 
-document.getElementById("inspectionID").value =
-inspectionID;
+    inspectionBox.value = inspectionID;
+
+}
+else{
+
+    alert("Invalid Inspection ID");
 
 }
 
@@ -38,6 +46,7 @@ const PHOTO_UPLOAD_API =
 
 
 
+
 photoInput.onchange=function(){
 
 
@@ -47,7 +56,7 @@ fileList.innerHTML="";
 Array.from(this.files).forEach(file=>{
 
 
-const li=document.createElement("li");
+let li=document.createElement("li");
 
 li.innerText=file.name;
 
@@ -65,12 +74,7 @@ fileList.appendChild(li);
 uploadButton.onclick=async function(){
 
 
-const id =
-document.getElementById("inspectionID").value.trim();
-
-
-
-if(!id){
+if(!inspectionID){
 
 alert("Inspection ID Missing");
 
@@ -91,24 +95,20 @@ return;
 
 uploadButton.disabled=true;
 
-statusBox.innerHTML="Uploading...";
-
-
 
 for(let i=0;i<photoInput.files.length;i++){
 
 
-const file=photoInput.files[i];
+let file=photoInput.files[i];
 
 
-const base64 =
-await new Promise(resolve=>{
+let base64 = await new Promise(resolve=>{
 
 
-const reader=new FileReader();
+let reader=new FileReader();
 
 
-reader.onload=()=>{
+reader.onload=function(){
 
 resolve(reader.result.split(",")[1]);
 
@@ -128,7 +128,7 @@ method:"POST",
 
 body:JSON.stringify({
 
-inspectionID:id,
+inspectionID:inspectionID,
 
 fileNo:i+1,
 
@@ -152,9 +152,6 @@ statusBox.innerHTML =
 
 
 alert("Upload Complete");
-
-
-uploadButton.disabled=false;
 
 
 };
