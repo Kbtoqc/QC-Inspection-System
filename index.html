@@ -189,6 +189,12 @@ Upload Photo
 <script src="js/validation.js"></script>
 <script src="js/saveInspection.js?v=3"></script>
 
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
+}
+</script>
+
 </body>
 
 </html>
