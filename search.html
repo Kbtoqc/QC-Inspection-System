@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspection Search</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+label {
+    width: 150px;
+    font-size: 16px;
+}
+
+input, select {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.date-group {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.date-group input {
+    width: 45%;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #0b57d0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Inspection Search</h2>
+
+
+<div class="row">
+<label>Inspection ID</label>
+<input type="text" id="inspectionID">
+</div>
+
+
+<div class="row">
+<label>SO No</label>
+<input type="text" id="soNo">
+</div>
+
+
+<div class="row">
+<label>Inspection Type</label>
+<select id="inspectionType">
+    <option value="">-- All --</option>
+    <option value="Incoming Inspection">Incoming Inspection</option>
+    <option value="Final Inspection">Final Inspection</option>
+    <option value="Process Inspection">Process Inspection</option>
+</select>
+</div>
+
+
+<div class="row">
+<label>Model</label>
+<input type="text" id="model">
+</div>
+
+
+<div class="row">
+<label>Serial No</label>
+<input type="text" id="serialNo">
+</div>
+
+
+<div class="row">
+<label>Inspection Date</label>
+
+<div class="date-group">
+<input type="date" id="dateFrom">
+<span>&nbsp; - &nbsp;</span>
+<input type="date" id="dateTo">
+</div>
+
+</div>
+
+
+<button onclick="searchInspection()">
+SEARCH
+</button>
+
+
+<div id="result"></div>
+
+
+</div>
+
+
+<script>
+
+function searchInspection(){
+
+    let data = {
+        inspectionID: document.getElementById("inspectionID").value,
+        soNo: document.getElementById("soNo").value,
+        inspectionType: document.getElementById("inspectionType").value,
+        model: document.getElementById("model").value,
+        serialNo: document.getElementById("serialNo").value,
+        dateFrom: document.getElementById("dateFrom").value,
+        dateTo: document.getElementById("dateTo").value
+    };
+
+
+    console.log(data);
+
+    // ต่อไปใส่ Google Apps Script API ตรงนี้
+
+}
+
+</script>
+
+
+</body>
+</html>
