@@ -3,6 +3,7 @@ console.log("Search JS Loaded");
 const SEARCH_API =
 "https://script.google.com/macros/s/AKfycbx8YbMBRqHYwElWw0o5vLu_XiQd4ARR5-0k1WcVw3fRxBWVUTkIkhZD4yjw121pw5oZ/exec";
 
+
 async function searchInspection() {
 
     const request = {
@@ -17,28 +18,34 @@ async function searchInspection() {
 
     };
 
-    console.log(request);
+
+    console.log("Send:", request);
+
 
     try {
 
         const response = await fetch(SEARCH_API, {
 
             method: "POST",
+
             body: JSON.stringify(request)
 
         });
 
+
         const result = await response.json();
 
-        console.log(result);
+
+        console.log("Result:", result);
+
 
         document.getElementById("result").innerHTML =
-            "<pre>" + JSON.stringify(result, null, 2) + "</pre>";
+        "<pre>" + JSON.stringify(result, null, 2) + "</pre";
 
-    }
-    catch (err) {
 
-        console.error(err);
+    } catch(error) {
+
+        console.error(error);
 
         alert("Search Error");
 
