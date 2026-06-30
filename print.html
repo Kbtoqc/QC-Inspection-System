@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QC Inspection Report</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+h2{
+    text-align:center;
+}
+
+.section{
+    margin-top:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #000;
+    padding:8px;
+}
+
+th{
+    background:#eee;
+}
+
+.header-table td:first-child{
+    width:180px;
+    font-weight:bold;
+}
+
+
+.photo img{
+    width:200px;
+    margin:10px;
+}
+
+
+@media print{
+
+    button{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h2>
+QC Inspection Report
+</h2>
+
+
+<button onclick="window.print()">
+PRINT
+</button>
+
+
+
+<div id="header" class="section"></div>
+
+
+<div id="detail" class="section"></div>
+
+
+<div id="photo" class="section photo"></div>
+
+
+
+</div>
+
+
+<script src="js/print.js"></script>
+
+
+</body>
+
+
+</html>
