@@ -208,7 +208,10 @@ async function searchInspection() {
 function printInspection(id){
 
 
-    alert("Print Inspection : " + id);
+    window.open(
+    "print.html?id=" + id,
+    "_blank"
+);
 
 
 }
