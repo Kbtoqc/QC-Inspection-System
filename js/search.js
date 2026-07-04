@@ -18,6 +18,8 @@ async function searchInspection() {
 
         inspectionType: document.getElementById("inspectionType").value,
 
+        materialType: document.getElementById("materialType").value,
+
         model: document.getElementById("model").value,
 
         serialNo: document.getElementById("serialNo").value,
