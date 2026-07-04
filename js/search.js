@@ -94,7 +94,7 @@ async function searchInspection() {
 
         <th>Judgement</th>
 
-        <th>Print</th>
+        <th>Action</th>
 
         </tr>
 
@@ -158,9 +158,11 @@ async function searchInspection() {
                 <td>
 
                 <button onclick="printInspection('${item.inspectionID}')">
-
                 Print
+                </button>
 
+                <button onclick="generateForm('${item.inspectionID}')">
+                Standard Form
                 </button>
 
 
