@@ -219,3 +219,42 @@ function printInspection(id){
 
 
 }
+async function generateForm(id){
+
+    try{
+
+        const response = await fetch(SEARCH_API,{
+
+            method:"POST",
+
+            body:JSON.stringify({
+
+                action:"generateTemplate",
+
+                inspectionID:id
+
+            })
+
+        });
+
+        const result = await response.json();
+
+        if(result.status==="success"){
+
+            window.open(result.url,"_blank");
+
+        }else{
+
+            alert(result.message);
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+        alert("Generate Error");
+
+    }
+
+}
