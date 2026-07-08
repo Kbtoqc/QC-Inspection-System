@@ -2,35 +2,317 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>KBTL QC Inspection</title>
-  
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#d4af37">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="KBTL QC">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>KBTL QC Inspection</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#1565C0">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="KBTL QC">
+
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+    background:#eef2f7;
+    padding:15px;
+    color:#333;
+
+}
+
+.container{
+
+    max-width:900px;
+    margin:auto;
+
+}
+
+.header{
+
+    background:#1565C0;
+    color:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    margin-bottom:20px;
+
+}
+
+.header h2{
+
+    font-size:24px;
+    margin-bottom:5px;
+
+}
+
+.card{
+
+    background:white;
+    border-radius:15px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.section-title{
+
+    font-size:18px;
+    color:#1565C0;
+    margin-bottom:15px;
+    font-weight:bold;
+
+}
+
+label{
+
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:15px;
+    background:white;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+    border-color:#1565C0;
+    box-shadow:0 0 5px rgba(21,101,192,.3);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+}
+
+button{
+
+    border:none;
+    border-radius:10px;
+    padding:14px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:.25s;
+
+}
+
+#saveInspection{
+
+    width:100%;
+    background:#1565C0;
+    color:white;
+
+}
+
+#saveInspection:hover{
+
+    background:#0d47a1;
+
+}
+
+#finishButton{
+
+    background:#2E7D32;
+    color:white;
+    flex:1;
+
+}
+
+#uploadPhotoButton{
+
+    background:#EF6C00;
+    color:white;
+    flex:1;
+
+}
+
+.button-group{
+
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+
+}
+
+#afterSave{
+
+    display:none;
+    margin-top:15px;
+    background:#E8F5E9;
+    border:1px solid #A5D6A7;
+    border-radius:12px;
+    padding:15px;
+
+}
+
+.success{
+
+    color:#2E7D32;
+    font-weight:bold;
+    font-size:18px;
+    text-align:center;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:10px;
+
+}
+
+th{
+
+    background:#1565C0;
+    color:white;
+    padding:12px;
+    text-align:left;
+    font-size:14px;
+
+}
+
+td{
+
+    padding:8px;
+    border-bottom:1px solid #ddd;
+
+}
+
+td input,
+td select,
+td textarea{
+
+    padding:8px;
+    font-size:14px;
+
+}
+
+@media(max-width:768px){
+
+table,
+thead,
+tbody,
+tr,
+th,
+td{
+
+display:block;
+
+}
+
+thead{
+
+display:none;
+
+}
+
+tr{
+
+background:white;
+margin-bottom:15px;
+border-radius:12px;
+padding:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+td{
+
+border:none;
+padding:8px 0;
+
+}
+
+td:before{
+
+display:block;
+font-weight:bold;
+color:#1565C0;
+margin-bottom:4px;
+
+}
+
+td:nth-child(1):before{content:"No.";}
+td:nth-child(2):before{content:"Check Point";}
+td:nth-child(3):before{content:"Specification";}
+td:nth-child(4):before{content:"Check Type";}
+td:nth-child(5):before{content:"Result";}
+td:nth-child(6):before{content:"Remark";}
+
+.button-group{
+
+flex-direction:column;
+
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h2>KBTL QC Inspection Form</h2>
+<div class="container">
 
-<br>
+<div class="header">
+
+<h2>KBTL QC Inspection</h2>
+
+<div>Quality Inspection System</div>
+
+</div>
+
+<!-- FORM START -->
+
+<div class="card">
 
 <button id="saveInspection">
-  Save Inspection
+Save Inspection
 </button>
 
-<div id="afterSave" style="display:none;">
+<div id="afterSave">
 
-<br>
+<div class="success">
+✓ Save Success
+</div>
 
-<b>Save Success</b>
-
-<br><br>
+<div class="button-group">
 
 <button id="finishButton">
 Finish
@@ -42,142 +324,174 @@ Upload Photo
 
 </div>
 
-<br>
-
-<div>
-  <label>Inspection Date</label>
-  <input type="date" id="inspectionDate">
 </div>
-
-<br>
-
-<div>
-  <label>SO No.</label>
-  <input type="text" id="soNo" placeholder="Enter SO No.">
-</div>
-
-<br>
-
-<div>
-  <label>PO No.</label>
-  <input type="text" id="poNo" placeholder="Enter PO No.">
-</div>
-
-<br>
-
-<div>
-  <label>Inspector</label>
-  <select id="inspector">
-    <option value="">Select Inspector</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Customer</label>
-  <select id="customer">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Supplier</label>
-  <select id="supplier">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Inspection Type</label>
-  <select id="inspectionType">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Material Type</label>
-  <select id="material">
-    <option value="">Loading...</option>
-  </select>
-</div>
-
-<br>
-
-<div>
-  <label>Model</label>
-  <input type="text" id="model" placeholder="Enter Model">
-</div>
-
-<br>
-
-<div>
-  <label>Serial No.</label>
-  <input type="text" id="serialNo" placeholder="Enter Serial No.">
-</div>
-
-<br>
-
-<div>
-  <label>Inspection Checklist</label>
-
-  <table border="1" id="inspectionTable">
-
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Check Point</th>
-        <th>Specification</th>
-        <th>Check Type</th>
-        <th>Result</th>
-        <th>Remark</th>
-      </tr>
-    </thead>
-
-    <tbody id="inspectionBody">
-    </tbody>
-
-  </table>
 
 </div>
 
-<br>
+<div class="card">
 
-<div>
+<div class="section-title">
+Inspection Information
+</div>
 
-  <label>Final Judgement</label>
+<div style="margin-bottom:15px;">
+<label>Inspection Date</label>
+<input type="date" id="inspectionDate">
+</div>
 
-  <select id="finalJudgement">
-    <option value="">Select</option>
-    <option value="Accept">Accept</option>
-    <option value="Reject">Reject</option>
-    <option value="Hold">Hold</option>
-  </select>
+<div style="margin-bottom:15px;">
+<label>SO No.</label>
+<input
+type="text"
+id="soNo"
+placeholder="Enter SO No.">
+</div>
+
+<div style="margin-bottom:15px;">
+<label>PO No.</label>
+<input
+type="text"
+id="poNo"
+placeholder="Enter PO No.">
+</div>
+
+<div style="margin-bottom:15px;">
+<label>Inspector</label>
+
+<select id="inspector">
+<option value="">Select Inspector</option>
+</select>
 
 </div>
 
-<br>
+<div style="margin-bottom:15px;">
+<label>Customer</label>
 
-<div>
-
-  <label>Final Remark</label>
-  <br>
-
-  <textarea
-    id="finalRemark"
-    rows="6"
-    cols="80"
-    placeholder="Enter final remark"></textarea>
+<select id="customer">
+<option value="">Loading...</option>
+</select>
 
 </div>
 
-<br>
+<div style="margin-bottom:15px;">
+<label>Supplier</label>
+
+<select id="supplier">
+<option value="">Loading...</option>
+</select>
+
+</div>
+
+<div style="margin-bottom:15px;">
+<label>Inspection Type</label>
+
+<select id="inspectionType">
+<option value="">Loading...</option>
+</select>
+
+</div>
+
+<div style="margin-bottom:15px;">
+<label>Material Type</label>
+
+<select id="material">
+<option value="">Loading...</option>
+</select>
+
+</div>
+
+<div style="margin-bottom:15px;">
+<label>Model</label>
+
+<input
+type="text"
+id="model"
+placeholder="Enter Model">
+
+</div>
+
+<div>
+
+<label>Serial No.</label>
+
+<input
+type="text"
+id="serialNo"
+placeholder="Enter Serial No.">
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+Inspection Checklist
+</div>
+
+<table border="1" id="inspectionTable">
+
+<thead>
+
+<tr>
+
+<th style="width:60px;">No.</th>
+
+<th>Check Point</th>
+
+<th>Specification</th>
+
+<th style="width:140px;">Check Type</th>
+
+<th style="width:140px;">Result</th>
+
+<th>Remark</th>
+
+</tr>
+
+</thead>
+
+<tbody id="inspectionBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+Final Result
+</div>
+
+<div style="margin-bottom:15px;">
+
+<label>Final Judgement</label>
+
+<select id="finalJudgement">
+
+<option value="">Select</option>
+<option value="Accept">Accept</option>
+<option value="Reject">Reject</option>
+<option value="Hold">Hold</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Final Remark</label>
+
+<textarea
+id="finalRemark"
+rows="6"
+placeholder="Enter final remark"></textarea>
+
+</div>
+
+</div>
 
 <script src="js/inspectionDate.js"></script>
 <script src="js/inspector.js"></script>
@@ -194,6 +508,8 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
 }
 </script>
+
+</div>
 
 </body>
 
