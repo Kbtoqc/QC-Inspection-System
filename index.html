@@ -4,7 +4,8 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>KBTL QC Inspection</title>
 
@@ -13,504 +14,1024 @@
 <meta name="theme-color" content="#1565C0">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
+
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 <meta name="apple-mobile-web-app-title" content="KBTL QC">
 
 <link rel="apple-touch-icon" href="icon-192.png">
 
+
 <style>
 
 *{
+
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
 }
+
 
 body{
 
-    background:#eef2f7;
-    padding:15px;
+    background:#f1f5f9;
     color:#333;
+    padding:12px;
 
 }
 
+
 .container{
 
+    width:100%;
     max-width:900px;
     margin:auto;
 
 }
 
-.header{
 
-    background:#1565C0;
+/* =========================
+   HEADER
+========================= */
+
+
+.app-header{
+
+    background:
+    linear-gradient(
+    135deg,
+    #1565C0,
+    #0D47A1
+    );
+
     color:white;
-    padding:20px;
-    border-radius:15px;
+
+    padding:22px 15px;
+
+    border-radius:18px;
+
     text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
-    margin-bottom:20px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.18);
+
+    margin-bottom:18px;
 
 }
 
-.header h2{
+
+.app-header h2{
 
     font-size:24px;
     margin-bottom:5px;
 
 }
 
+
+.app-header span{
+
+    font-size:14px;
+    opacity:.9;
+
+}
+
+
+
+/* =========================
+   CARD
+========================= */
+
+
 .card{
 
     background:white;
-    border-radius:15px;
+
+    border-radius:16px;
+
     padding:18px;
+
     margin-bottom:18px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    box-shadow:
+
+    0 3px 10px rgba(0,0,0,.08);
 
 }
 
-.section-title{
+
+
+.card-title{
 
     font-size:18px;
-    color:#1565C0;
-    margin-bottom:15px;
+
     font-weight:bold;
 
+    color:#1565C0;
+
+    border-bottom:
+
+    2px solid #e3f2fd;
+
+    padding-bottom:10px;
+
+    margin-bottom:15px;
+
 }
+
+
+
+/* =========================
+   FORM
+========================= */
+
+
+.form-group{
+
+    margin-bottom:15px;
+
+}
+
 
 label{
 
     display:block;
+
+    font-size:14px;
+
+    font-weight:600;
+
     margin-bottom:6px;
-    font-weight:bold;
+
+    color:#374151;
 
 }
+
+
 
 input,
 select,
 textarea{
 
+
     width:100%;
-    padding:12px;
-    border:1px solid #ccc;
+
+    padding:13px;
+
+    font-size:16px;
+
+    border:
+
+    1px solid #d1d5db;
+
     border-radius:10px;
-    font-size:15px;
+
     background:white;
 
 }
+
+
 
 input:focus,
 select:focus,
 textarea:focus{
 
+
     outline:none;
+
     border-color:#1565C0;
-    box-shadow:0 0 5px rgba(21,101,192,.3);
+
+    box-shadow:
+
+    0 0 0 3px rgba(21,101,192,.15);
+
 
 }
+
+
 
 textarea{
 
-    resize:vertical;
+    min-height:120px;
 
 }
+
+
+
+/* =========================
+   BUTTON
+========================= */
+
 
 button{
 
+    width:100%;
+
     border:none;
-    border-radius:10px;
-    padding:14px;
-    cursor:pointer;
-    font-size:16px;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    font-size:17px;
+
     font-weight:bold;
-    transition:.25s;
+
+    cursor:pointer;
 
 }
+
+
 
 #saveInspection{
 
-    width:100%;
+
     background:#1565C0;
+
     color:white;
 
+    box-shadow:
+
+    0 4px 10px rgba(21,101,192,.35);
+
+
 }
 
-#saveInspection:hover{
 
-    background:#0d47a1;
+
+#saveInspection:active{
+
+    transform:scale(.98);
 
 }
+
+
 
 #finishButton{
 
+
     background:#2E7D32;
+
     color:white;
-    flex:1;
 
 }
+
+
 
 #uploadPhotoButton{
 
+
     background:#EF6C00;
+
     color:white;
-    flex:1;
+
 
 }
 
-.button-group{
+
+
+.action-group{
+
 
     display:flex;
-    gap:10px;
-    margin-top:15px;
+
+    gap:12px;
+
 
 }
+
+
+
+/* =========================
+   SAVE RESULT
+========================= */
+
 
 #afterSave{
 
+
     display:none;
-    margin-top:15px;
+
     background:#E8F5E9;
-    border:1px solid #A5D6A7;
-    border-radius:12px;
-    padding:15px;
+
+    border:
+
+    1px solid #A5D6A7;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    margin-top:15px;
+
 
 }
 
-.success{
 
-    color:#2E7D32;
-    font-weight:bold;
-    font-size:18px;
+
+.save-success{
+
+
     text-align:center;
 
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#2E7D32;
+
+    margin-bottom:15px;
+
+
 }
+
+
+
+/* =========================
+   TABLE
+========================= */
+
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
 
 table{
 
     width:100%;
+
     border-collapse:collapse;
-    overflow:hidden;
-    border-radius:10px;
+
+    background:white;
 
 }
+
 
 th{
 
     background:#1565C0;
+
     color:white;
+
     padding:12px;
-    text-align:left;
+
     font-size:14px;
 
+    text-align:center;
+
+
 }
+
 
 td{
 
     padding:8px;
-    border-bottom:1px solid #ddd;
+
+    border-bottom:
+
+    1px solid #ddd;
+
+    vertical-align:top;
 
 }
+
 
 td input,
 td select,
 td textarea{
 
-    padding:8px;
+    padding:9px;
+
     font-size:14px;
 
 }
 
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
 @media(max-width:768px){
 
-table,
-thead,
-tbody,
-tr,
-th,
-td{
 
-display:block;
+body{
+
+    padding:8px;
 
 }
 
-thead{
 
-display:none;
 
-}
+.app-header h2{
 
-tr{
-
-background:white;
-margin-bottom:15px;
-border-radius:12px;
-padding:12px;
-box-shadow:0 2px 8px rgba(0,0,0,.08);
+    font-size:21px;
 
 }
 
-td{
 
-border:none;
-padding:8px 0;
 
-}
+.card{
 
-td:before{
+    padding:14px;
 
-display:block;
-font-weight:bold;
-color:#1565C0;
-margin-bottom:4px;
+    border-radius:14px;
 
 }
 
-td:nth-child(1):before{content:"No.";}
-td:nth-child(2):before{content:"Check Point";}
-td:nth-child(3):before{content:"Specification";}
-td:nth-child(4):before{content:"Check Type";}
-td:nth-child(5):before{content:"Result";}
-td:nth-child(6):before{content:"Remark";}
 
-.button-group{
 
-flex-direction:column;
+input,
+select,
+textarea{
+
+    font-size:16px;
 
 }
 
+
+
+/*
+ Responsive table
+*/
+
+.table-wrapper{
+
+    overflow-x:auto;
+
 }
+
+
+table{
+
+    min-width:700px;
+
+}
+
+
+
+.action-group{
+
+    flex-direction:column;
+
+}
+
+
+
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+
+@media(min-width:769px){
+
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    1fr 1fr;
+
+    gap:15px;
+
+}
+
+
+}
+
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
-<div class="header">
+<div class="app-header">
 
-<h2>KBTL QC Inspection</h2>
+<h2>
+KBTL QC Inspection
+</h2>
 
-<div>Quality Inspection System</div>
+<span>
+Quality Inspection System
+</span>
 
 </div>
 
-<!-- FORM START -->
+
+
+<!-- =========================
+     INSPECTION INFORMATION
+========================= -->
+
 
 <div class="card">
 
-<button id="saveInspection">
-Save Inspection
-</button>
 
-<div id="afterSave">
+<div class="card-title">
 
-<div class="success">
-✓ Save Success
-</div>
-
-<div class="button-group">
-
-<button id="finishButton">
-Finish
-</button>
-
-<button id="uploadPhotoButton">
-Upload Photo
-</button>
+📋 Inspection Information
 
 </div>
 
-</div>
+
+
+<div class="form-grid">
+
+
+
+<div class="form-group">
+
+<label>
+Inspection Date
+</label>
+
+<input 
+type="date" 
+id="inspectionDate">
 
 </div>
 
-<div class="card">
 
-<div class="section-title">
-Inspection Information
-</div>
 
-<div style="margin-bottom:15px;">
-<label>Inspection Date</label>
-<input type="date" id="inspectionDate">
-</div>
+<div class="form-group">
 
-<div style="margin-bottom:15px;">
-<label>SO No.</label>
-<input
-type="text"
+<label>
+SO No.
+</label>
+
+<input 
+type="text" 
 id="soNo"
 placeholder="Enter SO No.">
+
 </div>
 
-<div style="margin-bottom:15px;">
-<label>PO No.</label>
-<input
-type="text"
+
+
+<div class="form-group">
+
+<label>
+PO No.
+</label>
+
+<input 
+type="text" 
 id="poNo"
 placeholder="Enter PO No.">
+
 </div>
 
-<div style="margin-bottom:15px;">
-<label>Inspector</label>
+
+
+
+<div class="form-group">
+
+<label>
+Inspector
+</label>
+
 
 <select id="inspector">
-<option value="">Select Inspector</option>
+
+<option value="">
+Select Inspector
+</option>
+
+
 </select>
+
 
 </div>
 
-<div style="margin-bottom:15px;">
-<label>Customer</label>
+
+
+
+<div class="form-group">
+
+
+<label>
+Customer
+</label>
+
 
 <select id="customer">
-<option value="">Loading...</option>
+
+
+<option value="">
+Loading...
+</option>
+
+
 </select>
+
 
 </div>
 
-<div style="margin-bottom:15px;">
-<label>Supplier</label>
+
+
+
+<div class="form-group">
+
+
+<label>
+Supplier
+</label>
+
 
 <select id="supplier">
-<option value="">Loading...</option>
+
+
+<option value="">
+Loading...
+</option>
+
+
 </select>
+
 
 </div>
 
-<div style="margin-bottom:15px;">
-<label>Inspection Type</label>
+
+
+
+<div class="form-group">
+
+
+<label>
+Inspection Type
+</label>
+
 
 <select id="inspectionType">
-<option value="">Loading...</option>
+
+
+<option value="">
+Loading...
+</option>
+
+
 </select>
+
 
 </div>
 
-<div style="margin-bottom:15px;">
-<label>Material Type</label>
+
+
+
+<div class="form-group">
+
+
+<label>
+Material Type
+</label>
+
 
 <select id="material">
-<option value="">Loading...</option>
+
+
+<option value="">
+Loading...
+</option>
+
+
 </select>
+
 
 </div>
 
-<div style="margin-bottom:15px;">
-<label>Model</label>
+
+
+
+<div class="form-group">
+
+
+<label>
+Model
+</label>
+
 
 <input
 type="text"
 id="model"
 placeholder="Enter Model">
 
+
 </div>
 
-<div>
 
-<label>Serial No.</label>
+
+
+
+<div class="form-group">
+
+
+<label>
+Serial No.
+</label>
+
 
 <input
 type="text"
 id="serialNo"
 placeholder="Enter Serial No.">
 
-</div>
 
 </div>
+
+
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     INSPECTION CHECKLIST
+========================= -->
+
 
 <div class="card">
 
-<div class="section-title">
-Inspection Checklist
+
+<div class="card-title">
+
+🔍 Inspection Checklist
+
 </div>
+
+
+
+<div class="table-wrapper">
+
 
 <table border="1" id="inspectionTable">
 
+
 <thead>
+
 
 <tr>
 
-<th style="width:60px;">No.</th>
 
-<th>Check Point</th>
+<th>
+No.
+</th>
 
-<th>Specification</th>
 
-<th style="width:140px;">Check Type</th>
+<th>
+Check Point
+</th>
 
-<th style="width:140px;">Result</th>
 
-<th>Remark</th>
+<th>
+Specification
+</th>
+
+
+<th>
+Check Type
+</th>
+
+
+<th>
+Result
+</th>
+
+
+<th>
+Remark
+</th>
+
 
 </tr>
 
+
 </thead>
+
+
 
 <tbody id="inspectionBody">
 
+
 </tbody>
+
+
 
 </table>
 
+
 </div>
+
+
+</div>
+
+
+<!-- =========================
+     FINAL RESULT
+========================= -->
+
 
 <div class="card">
 
-<div class="section-title">
-Final Result
+
+<div class="card-title">
+
+✅ Final Result
+
 </div>
 
-<div style="margin-bottom:15px;">
 
-<label>Final Judgement</label>
+
+<div class="form-group">
+
+
+<label>
+Final Judgement
+</label>
+
 
 <select id="finalJudgement">
 
-<option value="">Select</option>
-<option value="Accept">Accept</option>
-<option value="Reject">Reject</option>
-<option value="Hold">Hold</option>
+
+<option value="">
+Select
+</option>
+
+
+<option value="Accept">
+Accept
+</option>
+
+
+<option value="Reject">
+Reject
+</option>
+
+
+<option value="Hold">
+Hold
+</option>
+
 
 </select>
 
+
 </div>
 
-<div>
 
-<label>Final Remark</label>
+
+
+<div class="form-group">
+
+
+<label>
+Final Remark
+</label>
+
 
 <textarea
+
 id="finalRemark"
+
 rows="6"
-placeholder="Enter final remark"></textarea>
+
+placeholder="Enter final remark">
+
+
+</textarea>
+
 
 </div>
 
+
+
 </div>
+
+
+
+
+
+<!-- =========================
+     SAVE AREA
+========================= -->
+
+
+<div class="card">
+
+
+<button id="saveInspection">
+
+💾 Save Inspection
+
+</button>
+
+
+
+<div id="afterSave">
+
+
+<div class="save-success">
+
+✅ Save Success
+
+</div>
+
+
+
+<div class="action-group">
+
+
+<button id="finishButton">
+
+Finish
+
+</button>
+
+
+
+<button id="uploadPhotoButton">
+
+Upload Photo
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 
 <script src="js/inspectionDate.js"></script>
+
 <script src="js/inspector.js"></script>
+
 <script src="js/customer.js"></script>
+
 <script src="js/supplier.js"></script>
+
 <script src="js/inspectionType.js"></script>
+
 <script src="js/material.js"></script>
+
 <script src="js/inspectionItem.js"></script>
+
 <script src="js/validation.js"></script>
+
 <script src="js/saveInspection.js?v=3"></script>
 
+
+
+
+<!-- =========================
+     SERVICE WORKER
+========================= -->
+
+
 <script>
+
 if ("serviceWorker" in navigator) {
+
     navigator.serviceWorker.register("./sw.js");
+
 }
+
 </script>
 
+
+
 </div>
+
 
 </body>
 
+
 </html>
+
