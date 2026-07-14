@@ -38,24 +38,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let resultField = "";
 
-      if (item.resultType === "OKNGNA") {
+if (item.resultType === "OKNGNA") {
 
-        resultField = `
-          <select class="result">
-            <option value="">Select</option>
-            <option value="OK">OK</option>
-            <option value="NG">NG</option>
-            <option value="NA">NA</option>
-          </select>
-        `;
+  resultField = `
+    <select class="result">
+      <option value="">Select</option>
+      <option value="OK">OK</option>
+      <option value="NG">NG</option>
+      <option value="N/A">N/A</option>
+    </select>
+  `;
 
-      } else {
+}
+else if (item.resultType === "DROPDOWN") {
 
-        resultField = `
-          <input type="text" class="result">
-        `;
+  let options = "";
 
-      }
+  item.resultOption.split(",").forEach(opt => {
+
+    options += `
+      <option value="${opt.trim()}">
+        ${opt.trim()}
+      </option>
+    `;
+
+  });
+
+
+  resultField = `
+    <select class="result">
+      <option value="">Select</option>
+      ${options}
+    </select>
+  `;
+
+}
+else {
+
+  resultField = `
+    <input type="text" class="result">
+  `;
+
+}
 
       const row = document.createElement("tr");
 
